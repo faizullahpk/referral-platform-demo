@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <title>My Team - Rizq Digital</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-primary: #0a0e27;
+      --bg-secondary: #141a3a;
+      --accent-green: #22c55e;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #8b5cf6;
+      --text-primary: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1729 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 100px;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+      animation: gradientShift 15s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientShift { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+
+    .container { max-width: 430px; margin: 0 auto; padding: 0; }
+
+    /* Header */
+    .header {
+      background: rgba(10, 14, 39, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .header-top { display: flex; justify-content: space-between; align-items: center; }
+
+    .logo-section { display: flex; align-items: center; gap: 12px; }
+
+    .logo {
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800; color: white;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+    }
+
+    .brand-name {
+      font-size: 18px; font-weight: 700;
+      background: linear-gradient(135deg, #22c55e, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .header-actions { display: flex; gap: 10px; }
+
+    .icon-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .icon-btn:hover { background: rgba(34, 197, 94, 0.1); border-color: var(--accent-green); }
+
+    .main-content { padding: 20px; }
+
+    /* Summary Banner */
+    .team-banner {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(34, 197, 94, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .team-banner::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: radial-gradient(circle at 20px 20px, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+      background-size: 40px 40px;
+      opacity: 0.3;
+    }
+
+    .team-banner::after {
+      content: '';
+      position: absolute;
+      width: 250px; height: 250px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      top: -120px; right: -80px;
+    }
+
+    .banner-label {
+      position: relative; z-index: 2;
+      font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 500;
+      letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px;
+    }
+
+    .banner-title {
+      position: relative; z-index: 2;
+      font-size: 28px; font-weight: 800; color: white;
+      margin-bottom: 4px;
+    }
+
+    .banner-sub {
+      position: relative; z-index: 2;
+      font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 20px;
+    }
+
+    .banner-stats {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+
+    .banner-stat {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px; padding: 12px 8px; text-align: center;
+    }
+
+    .banner-stat-val { font-size: 18px; font-weight: 800; color: white; }
+    .banner-stat-lbl { font-size: 10px; color: rgba(255,255,255,0.8); font-weight: 600; margin-top: 2px; }
+
+    /* Filter Tabs */
+    .filter-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-muted);
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 8px 20px rgba(34,197,94,0.3);
+    }
+
+    /* Section */
+    .section {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px; padding: 20px; margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 16px; font-weight: 700; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .title-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+
+    .member-count {
+      margin-left: auto;
+      background: rgba(34,197,94,0.15);
+      color: var(--accent-green);
+      font-size: 11px; font-weight: 700;
+      padding: 4px 10px; border-radius: 20px;
+      border: 1px solid rgba(34,197,94,0.3);
+    }
+
+    /* Member Card */
+    .member-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px; padding: 16px;
+      margin-bottom: 12px;
+      transition: all 0.3s;
+    }
+
+    .member-card:hover { background: rgba(34,197,94,0.05); border-color: rgba(34,197,94,0.2); }
+
+    .member-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+    }
+
+    .member-avatar {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; color: white;
+      box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+    }
+
+    .member-info { flex: 1; min-width: 0; }
+    .member-name { font-size: 14px; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .member-email { font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .member-badge {
+      padding: 5px 10px; border-radius: 20px;
+      font-size: 10px; font-weight: 700; flex-shrink: 0;
+    }
+
+    .badge-active {
+      background: rgba(34,197,94,0.2);
+      color: var(--accent-green);
+      border: 1px solid rgba(34,197,94,0.3);
+    }
+
+    .badge-pending {
+      background: rgba(234,179,8,0.2);
+      color: #eab308;
+      border: 1px solid rgba(234,179,8,0.3);
+    }
+
+    .member-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    }
+
+    .m-stat {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px; padding: 8px; text-align: center;
+    }
+
+    .m-stat-lbl { font-size: 9px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px; }
+    .m-stat-val { font-size: 13px; font-weight: 700; color: var(--accent-green); }
+    .m-stat-val.yellow { color: #eab308; }
+    .m-stat-val.cyan { color: var(--accent-cyan); }
+
+    .member-joined {
+      margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid var(--glass-border);
+      font-size: 11px; color: var(--text-muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 430px;
+      background: rgba(10, 14, 39, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--glass-border);
+      padding: 12px 20px;
+      display: flex; justify-content: space-around;
+      z-index: 100;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .nav-item {
+      text-decoration: none; color: var(--text-muted);
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      transition: all 0.3s; padding: 6px 12px; border-radius: 12px;
+    }
+
+    .nav-item.active { color: var(--accent-green); background: rgba(34,197,94,0.1); }
+    .nav-icon { font-size: 20px; }
+    .nav-label { font-size: 10px; font-weight: 600; }
+
+    /* Toast */
+    .toast {
+      position: fixed; top: 80px; left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(34,197,94,0.95);
+      backdrop-filter: blur(10px);
+      color: white; padding: 14px 24px; border-radius: 12px;
+      font-weight: 600; font-size: 14px;
+      box-shadow: 0 10px 30px rgba(34,197,94,0.4);
+      opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 9999;
+    }
+
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Loading */
+    .loading { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+
+    .spinner {
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top: 3px solid var(--accent-green);
+      border-radius: 50%; width: 40px; height: 40px;
+      animation: spin 1s linear infinite; margin: 0 auto 12px;
+    }
+
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .no-data { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+    .no-data i { font-size: 48px; opacity: 0.3; margin-bottom: 12px; display: block; }
+    .no-data p { margin-bottom: 6px; }
+
+    .invite-btn {
+      display: inline-block; margin-top: 16px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      color: white; border-radius: 12px; text-decoration: none;
+      font-weight: 700; font-size: 14px;
+      box-shadow: 0 8px 20px rgba(34,197,94,0.3);
+      transition: all 0.3s;
+    }
+
+    .invite-btn:active { transform: scale(0.95); }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-top">
+      <div class="logo-section">
+        <div class="logo">R</div>
+        <div>
+          <div class="brand-name">Rizq Digital</div>
+          <div class="page-subtitle">My Team</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="dashboard.html" class="icon-btn" title="Back to Dashboard">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <button class="icon-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-content">
+
+      <!-- Team Banner -->
+      <div class="team-banner">
+        <div class="banner-label">Team Overview</div>
+        <div class="banner-title">My Network</div>
+        <div class="banner-sub">Earn 2% commission on every deposit</div>
+
+        <!-- Permanent invite link section -->
+        <div style="background:rgba(255,255,255,0.12);border-radius:12px;padding:12px 14px;margin:14px 0 4px;display:flex;align-items:center;gap:10px;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:600;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:3px;">Your Invite Link</div>
+            <div style="font-size:12px;color:white;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="inviteLinkDisplay">Loading...</div>
+          </div>
+          <button onclick="copyMyInviteLink()" style="background:white;color:#16a34a;border:none;border-radius:10px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer;flex-shrink:0;font-family:'Poppins',sans-serif;">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+
+        <div class="banner-stats">
+          <div class="banner-stat">
+            <div class="banner-stat-val" id="totalTeam">0</div>
+            <div class="banner-stat-lbl">Total Members</div>
+          </div>
+          <div class="banner-stat">
+            <div class="banner-stat-val" id="activeTeam">0</div>
+            <div class="banner-stat-lbl">Active Members</div>
+          </div>
+          <div class="banner-stat">
+            <div class="banner-stat-val">Rs <span id="teamBonus">0</span></div>
+            <div class="banner-stat-lbl">Team Earnings</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterMembers('all', this)">All</button>
+        <button class="tab-btn" onclick="filterMembers('active', this)">Active</button>
+        <button class="tab-btn" onclick="filterMembers('pending', this)">Pending</button>
+      </div>
+
+      <!-- Members List -->
+      <div class="section">
+        <div class="section-title">
+          <div class="title-icon">👥</div>
+          Team Members
+          <span class="member-count" id="memberCount">0</span>
+        </div>
+        <div id="membersContainer">
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading your team...
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+      <i class="nav-icon fas fa-home"></i>
+      <span class="nav-label">Dashboard</span>
+    </a>
+    <a href="plans.html" class="nav-item">
+      <i class="nav-icon fas fa-layer-group"></i>
+      <span class="nav-label">Plans</span>
+    </a>
+    <a href="my-team.html" class="nav-item active">
+      <i class="nav-icon fas fa-users"></i>
+      <span class="nav-label">My Team</span>
+    </a>
+    <a href="withdraw.html" class="nav-item">
+      <i class="nav-icon fas fa-wallet"></i>
+      <span class="nav-label">Withdraw</span>
+    </a>
+  </nav>
+
+  <div class="toast" id="toast"><span id="toastMessage"></span></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+
+    let currentUser   = null;
+    let allMembers    = [];   // full member list
+    let currentFilter = 'all';
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = "login.html"; return; }
+      currentUser = user;
+      await loadTeamData();
+    });
+
+    async function loadTeamData() {
+      try {
+        // 1. Get current user doc for summary stats + referralCode
+        const userSnap = await getDoc(doc(db, "users", currentUser.uid));
+        if (!userSnap.exists()) return;
+
+        const userData = userSnap.data();
+        document.getElementById("totalTeam").textContent  = userData.totalTeam  || 0;
+        document.getElementById("activeTeam").textContent = userData.activeTeam || 0;
+        document.getElementById("teamBonus").textContent  = formatNumber(userData.teamBonus || 0);
+
+        // Build referral link — use email-based code if stored, else derive from email
+        const emailCode = currentUser.email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '').substring(0, 12);
+        const refCode = userData.referralCode || emailCode;
+        const inviteLink = `https://rizqdigital.org/register.html?ref=${refCode}`;
+        window._myInviteLink = inviteLink;
+
+        // Show in banner
+        document.getElementById("inviteLinkDisplay").textContent = `rizqdigital.org/register.html?ref=${refCode}`;
+
+        // 2. Query all users who were referred by currentUser
+        const membersQuery = query(
+          collection(db, "users"),
+          where("referredBy", "==", currentUser.uid)
+        );
+        const membersSnap = await getDocs(membersQuery);
+
+        if (membersSnap.empty) {
+          renderEmpty(inviteLink);
+          return;
+        }
+
+        // 3. Query commissions earned from each referred user
+        const commissionsQuery = query(
+          collection(db, "commissions"),
+          where("referrerId", "==", currentUser.uid)
+        );
+        const commissionsSnap = await getDocs(commissionsQuery);
+
+        // Map: referredUserId -> { totalDeposit, totalCommission }
+        const commissionMap = {};
+        commissionsSnap.forEach(d => {
+          const c = d.data();
+          if (!commissionMap[c.referredUserId]) {
+            commissionMap[c.referredUserId] = { totalDeposit: 0, totalCommission: 0 };
+          }
+          commissionMap[c.referredUserId].totalDeposit    += (c.depositAmount    || 0);
+          commissionMap[c.referredUserId].totalCommission += (c.commissionAmount || 0);
+        });
+
+        // 4. Build member list
+        allMembers = [];
+        membersSnap.forEach(d => {
+          const m    = d.data();
+          const uid  = d.id;
+          const comm = commissionMap[uid] || { totalDeposit: 0, totalCommission: 0 };
+
+          allMembers.push({
+            uid,
+            name:       m.username || m.email?.split('@')[0] || 'User',
+            email:      m.email || '—',
+            status:     comm.totalDeposit > 0 ? 'active' : 'pending',
+            deposit:    comm.totalDeposit,
+            commission: comm.totalCommission,
+            joinedAt:   m.createdAt || null
+          });
+        });
+
+        // Sort: active first, then by join date
+        allMembers.sort((a, b) => {
+          if (a.status === 'active' && b.status !== 'active') return -1;
+          if (a.status !== 'active' && b.status === 'active') return  1;
+          return 0;
+        });
+
+        document.getElementById("memberCount").textContent = allMembers.length;
+        renderMembers(allMembers);
+
+      } catch (err) {
+        console.error("Error loading team:", err);
+        document.getElementById("membersContainer").innerHTML =
+          `<div class="no-data"><i class="fas fa-exclamation-circle"></i><p>Error loading team. Please refresh.</p></div>`;
+      }
+    }
+
+    function renderMembers(list) {
+      const container = document.getElementById("membersContainer");
+      document.getElementById("memberCount").textContent = list.length;
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="no-data"><i class="fas fa-user-slash"></i><p>No members in this category.</p></div>`;
+        return;
+      }
+
+      let html = '';
+      list.forEach(m => {
+        const initial  = m.name.charAt(0).toUpperCase();
+        const isActive = m.status === 'active';
+        const joined   = formatDate(m.joinedAt);
+
+        html += `
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar">${initial}</div>
+              <div class="member-info">
+                <div class="member-name">${escapeHtml(m.name)}</div>
+                <div class="member-email">${escapeHtml(m.email)}</div>
+              </div>
+              <div class="member-badge ${isActive ? 'badge-active' : 'badge-pending'}">
+                ${isActive ? '✅ Active' : '⏳ Pending'}
+              </div>
+            </div>
+            <div class="member-stats">
+              <div class="m-stat">
+                <div class="m-stat-lbl">Deposited</div>
+                <div class="m-stat-val yellow">Rs ${formatNumber(m.deposit)}</div>
+              </div>
+              <div class="m-stat">
+                <div class="m-stat-lbl">Your Bonus</div>
+                <div class="m-stat-val">Rs ${formatNumber(m.commission)}</div>
+              </div>
+              <div class="m-stat">
+                <div class="m-stat-lbl">Status</div>
+                <div class="m-stat-val cyan">${isActive ? 'Investing' : 'No Deposit'}</div>
+              </div>
+            </div>
+            <div class="member-joined">
+              <i class="fas fa-calendar-alt"></i>
+              Joined: ${joined}
+            </div>
+          </div>`;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderEmpty(link) {
+      // link is the full invite URL already built
+      document.getElementById("membersContainer").innerHTML = `
+        <div class="no-data">
+          <i class="fas fa-users"></i>
+          <p style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:6px;">Your team is empty</p>
+          <p>Share your referral link and earn 2% commission on every deposit your team makes.</p>
+          <button class="invite-btn" onclick="copyLink('${escapeHtml(link)}')">
+            <i class="fas fa-share-alt"></i> Copy Invite Link
+          </button>
+        </div>`;
+    }
+
+    // Filter tabs
+    window.filterMembers = function(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filtered = filter === 'all'
+        ? allMembers
+        : allMembers.filter(m => m.status === filter);
+
+      renderMembers(filtered);
+    };
+
+    window.copyLink = async function(link) {
+      try {
+        await navigator.clipboard.writeText(link);
+        showToast("Invite link copied!");
+      } catch {
+        showToast("Link ready to share!");
+      }
+    };
+
+    window.copyMyInviteLink = async function() {
+      const link = window._myInviteLink || document.getElementById("inviteLinkDisplay").textContent;
+      try {
+        await navigator.clipboard.writeText(link.startsWith("http") ? link : `https://${link}`);
+        showToast("✅ Invite link copied!");
+      } catch {
+        showToast("Link: " + link);
+      }
+    };
+
+    function formatNumber(n) {
+      return Number(n || 0).toLocaleString('en-PK', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    function formatDate(val) {
+      if (!val) return 'N/A';
+      try {
+        const d = val.toDate ? val.toDate() : new Date(val);
+        return d.toLocaleDateString('en-PK', { day: 'numeric', month: 'short', year: 'numeric' });
+      } catch { return 'N/A'; }
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toastMessage").textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    window.logout = function() {
+      signOut(auth).then(() => { window.location.href = "index.html"; });
+    };
+  </script>
+</body>
+</html>

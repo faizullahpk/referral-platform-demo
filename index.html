@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rizq Digital - Home</title>
+  
+  <meta name="title" content="Rizq Digital - Home">
+  <meta name="description" content="Rizq Digital - Premium investment platform delivering smart, secure and high-return opportunities for global investors.">
+  <meta name="keywords" content="Rizq digital, investment platform">
+  
+  <link rel="shortcut icon" href="assets/images/logoIcon/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="assets/images/logoIcon/logo.png">
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Rizq Digital - Home">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rizq Digital">
+  <meta property="og:description" content="Premium investment platform">
+  <meta property="og:url" content="https://rizqdigital.org">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+:root {
+  --card-bg: #ffffff;
+  --card-text: #111827;
+  --muted-text: #6b7280;
+  --number-color: #16a34a;
+  --bg-primary: #d1fae5;
+  --accent-green: #22c55e;
+  --accent-cyan: #06b6d4;
+  --text-dark: #064e3b;
+  --border-light: #86efac;
+}
+
+body.dark {
+  --card-bg: #0f172a;
+  --card-text: #e5e7eb;
+  --muted-text: #9ca3af;
+  --number-color: #4ade80;
+  --bg-primary: #020617;
+  --text-dark: #e5e7eb;
+  --border-light: rgba(34, 197, 94, 0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #d1fae5, #bbf7d0, #a7f3d0);
+  background-size: 400% 400%;
+  animation: bg 20s ease infinite;
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+body.dark {
+  background: linear-gradient(135deg, #020617, #0f172a, #1a1f3a);
+}
+
+@keyframes bg {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 40px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(34,197,94,0.2);
+}
+
+body.dark .header { background: rgba(15,23,42,0.9); border-bottom: 1px solid #1e293b; }
+
+.brand { font-size: 24px; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
+.brand i { color: var(--accent-green); }
+
+.header-actions { display: flex; gap: 15px; align-items: center; }
+
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--card-bg); border: 1px solid var(--border-light);
+  cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;
+}
+.theme-toggle:hover { transform: scale(1.1); }
+
+.login-btn {
+  background: var(--card-bg); color: var(--card-text);
+  border: 1px solid var(--border-light);
+  padding: 10px 20px; border-radius: 999px; font-weight: 600;
+  cursor: pointer; transition: all 0.3s; text-decoration: none;
+}
+.login-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(34,197,94,0.3); }
+
+/* ===== REF BANNER ===== */
+.ref-banner {
+  background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(6,182,212,0.1));
+  border-bottom: 1px solid rgba(34,197,94,0.3);
+  padding: 10px 40px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-dark);
+  display: none;
+}
+
+body.dark .ref-banner { color: #86efac; }
+.ref-banner.show { display: block; }
+.ref-banner strong { color: var(--accent-green); }
+
+/* ===== HERO ===== */
+.hero { padding: 60px 40px; text-align: center; max-width: 1200px; margin: 0 auto; }
+
+.hero h1 {
+  font-size: 48px; font-weight: 800; margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero p { font-size: 18px; color: var(--muted-text); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* ===== HERO STATS CARD ===== */
+.hero-card {
+  background: rgba(255,255,255,0.95); border-radius: 24px; padding: 40px;
+  max-width: 900px; margin: 0 auto 40px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1); border: 1px solid rgba(34,197,94,0.2);
+}
+
+body.dark .hero-card { background: #0f172a; border: 1px solid #1e293b; box-shadow: 0 12px 30px rgba(0,0,0,0.65); }
+
+.badge {
+  display: inline-block; background: #ecfdf5; color: var(--text-dark);
+  padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: 14px;
+  margin-bottom: 20px; border: 1px solid var(--border-light);
+}
+
+body.dark .badge { background: #020617; color: #86efac; border: 1px solid #1e293b; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px; }
+.stat-item h3 { font-size: 32px; font-weight: 800; color: var(--number-color); margin-bottom: 5px; }
+.stat-item p  { font-size: 14px; font-weight: 600; color: var(--muted-text); }
+.rs { font-size: 18px; vertical-align: top; margin-right: 2px; }
+
+/* ===== PLANS SECTION ===== */
+.plans-section { padding: 80px 40px; background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); }
+body.dark .plans-section { background: var(--bg-primary); }
+
+.section-title { text-align: center; font-size: 36px; font-weight: 800; margin-bottom: 50px; color: var(--text-dark); }
+
+.plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+
+.plan {
+  background: #ecfdf5; border-radius: 20px; padding: 30px; text-align: center;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 10px 30px rgba(34,197,94,0.25);
+  transition: transform 0.3s;
+}
+.plan:hover { transform: translateY(-5px); }
+body.dark .plan { background: #0f172a; border: 1px solid #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+.plan.popular { position: relative; border: 2px solid #facc15; transform: scale(1.05); }
+.plan.popular::before {
+  content: "MOST POPULAR"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: #facc15; color: #111827;
+  padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 999px; letter-spacing: 0.5px;
+}
+body.dark .plan.popular { border-color: #fde047; }
+body.dark .plan.popular::before { background: #fde047; color: #052e16; }
+
+.plan h3 { color: #166534; font-size: 24px; font-weight: 700; margin-bottom: 15px; }
+body.dark .plan h3 { color: #22c55e; }
+
+.plan .price { font-size: 32px; font-weight: 700; color: var(--text-dark); margin: 20px 0; }
+body.dark .plan .price { color: #ecfeff; }
+
+.plan .box {
+  background: #e5e7eb; color: var(--text-dark); border-radius: 12px;
+  padding: 12px; margin: 12px 0; border: 1px solid #bbf7d0; font-size: 14px;
+}
+body.dark .plan .box { background: rgba(255,255,255,0.06); color: #e5e7eb; border: 1px solid rgba(255,255,255,0.08); }
+
+/* ✅ All Buy Now buttons call registerWithRef() */
+.plan button {
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+  color: white; font-weight: 600; padding: 14px; border-radius: 14px;
+  width: 100%; margin-top: 20px; border: none; cursor: pointer; transition: all 0.3s;
+  box-shadow: 0 0 25px rgba(34,197,94,0.5);
+}
+.plan button:hover { transform: scale(1.05); }
+
+.tooltip { font-size: 13px; opacity: 0.85; margin-top: 6px; color: var(--muted-text); }
+
+/* ===== PLATFORM STATS ===== */
+#platform-stats { padding: 80px 40px; background: #f0fdf4; }
+body.dark #platform-stats { background: #020617; }
+
+.platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+
+.stat-card {
+  background: var(--card-bg); color: var(--card-text); border-radius: 20px; padding: 30px;
+  text-align: center; transition: all 0.3s; border: 1px solid rgba(34,197,94,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+body.dark .stat-card { background: #0f172a; border: 1px solid #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+.stat-card:hover { transform: translateY(-5px); }
+
+.stat-icon {
+  width: 60px; height: 60px; margin: 0 auto 20px;
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 24px; color: white;
+}
+
+.stat-card h3 { font-size: 16px; font-weight: 600; color: var(--muted-text); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-card .number { font-size: 32px; font-weight: 700; color: var(--number-color); }
+
+/* ===== FOOTER ===== */
+.footer-hd { background: linear-gradient(135deg, #064e3b, #047857); color: #e5e7eb; padding: 60px 40px 30px; }
+
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 40px; }
+
+.footer-brand h2 { font-size: 24px; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+.footer-brand p  { line-height: 1.6; opacity: 0.9; margin-bottom: 20px; }
+
+.footer-social { display: flex; gap: 15px; }
+.footer-social a {
+  width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;
+}
+.footer-social a:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+
+.footer-box h4 { font-size: 18px; font-weight: 700; margin-bottom: 15px; }
+.footer-box p  { line-height: 1.8; opacity: 0.9; margin-bottom: 10px; }
+.footer-box i  { margin-right: 8px; color: var(--accent-green); }
+
+.footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.8; grid-column: 1 / -1; }
+
+/* ===== WHATSAPP BUTTON ===== */
+.whatsapp-float {
+  position: fixed; bottom: 20px; right: 20px;
+  width: 55px; height: 55px; background: #25D366; color: white;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 28px; z-index: 9999;
+  box-shadow: 0 10px 30px rgba(37,211,102,0.4);
+  transition: all 0.3s; cursor: pointer; text-decoration: none;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+
+.wa-tooltip {
+  position: absolute; right: 70px;
+  background: #111827; color: white; padding: 8px 12px; border-radius: 8px;
+  font-size: 13px; white-space: nowrap;
+  opacity: 0; transform: translateY(5px); pointer-events: none; transition: 0.3s;
+}
+.whatsapp-float:hover .wa-tooltip { opacity: 1; transform: translateY(0); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 32px; }
+  .hero, .plans-section, #platform-stats { padding: 40px 20px; }
+  .header { padding: 15px 20px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .ref-banner { padding: 10px 20px; }
+}
+
+@media (max-width: 480px) {
+  .brand { font-size: 18px; }
+  .hero h1 { font-size: 28px; }
+  .stats { grid-template-columns: 1fr; }
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== REF BANNER (shows when someone visits with ?ref=) ===== -->
+  <div class="ref-banner" id="refBanner">
+    <i class="fas fa-gift"></i> You were invited by a friend! 
+    Register now to join with referral code <strong id="refCodeDisplay"></strong>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="brand">
+      <i class="fas fa-gem"></i>
+      <span>Rizq Digital</span>
+    </div>
+    <div class="header-actions">
+      <button class="theme-toggle" onclick="toggleDark()" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <a href="login.html" class="login-btn">Login</a>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <h1>Welcome to Rizq Digital</h1>
+    <p>A premium investment platform delivering smart, secure and high-return opportunities for global investors.</p>
+    
+    <div class="hero-card">
+      <div class="badge">🔥 Live Investment Platform</div>
+      
+      <div class="stats">
+        <div class="stat-item">
+          <h3><span class="rs">Rs</span><span data-live="deposit">0</span></h3>
+          <p>Total Deposits</p>
+        </div>
+        <div class="stat-item">
+          <h3><span class="rs">Rs</span><span data-live="withdraw">0</span></h3>
+          <p>Total Withdrawn</p>
+        </div>
+        <div class="stat-item">
+          <h3><span data-live="users">0</span>+</h3>
+          <p>Active Investors</p>
+        </div>
+      </div>
+      
+      <p class="tooltip">
+        <i class="fas fa-users"></i> Last investor joined <span id="lastJoin">12</span> minutes ago
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== INVESTMENT PLANS ===== -->
+  <section class="plans-section" id="plans">
+    <h2 class="section-title">Investment Plans</h2>
+    
+    <!-- STARTER -->
+    <div style="margin-bottom: 60px;">
+      <h3 style="text-align:center;font-size:28px;margin-bottom:10px;color:#f59e0b;">
+        <i class="fas fa-star"></i> Daily Starter Package
+      </h3>
+      <p style="text-align:center;color:var(--muted-text);margin-bottom:30px;">Required for all new users • Daily withdrawals</p>
+      
+      <div class="plans" style="max-width:400px;margin:0 auto;">
+        <div class="plan popular">
+          <h3>DAILY STARTER</h3>
+          <div class="price"><span class="rs">Rs</span> 500</div>
+          <div class="box">Daily Profit: <strong>Rs 50</strong></div>
+          <div class="box">Duration: <strong>15 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 750</strong></div>
+          <div class="box">ROI: <strong>150%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEKLY PACKAGES -->
+    <div style="margin-bottom: 60px;">
+      <h3 style="text-align:center;font-size:28px;margin-bottom:10px;color:var(--accent-cyan);">
+        <i class="fas fa-calendar-week"></i> Field A — Weekly Packages
+      </h3>
+      <p style="text-align:center;color:var(--muted-text);margin-bottom:30px;">7-Day plans • Withdrawal at end only</p>
+      
+      <div class="plans">
+        <div class="plan">
+          <h3>WEEKLY BRONZE</h3>
+          <div class="price"><span class="rs">Rs</span> 1,000</div>
+          <div class="box">Total Profit: <strong>Rs 150</strong></div>
+          <div class="box">Duration: <strong>7 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 1,150</strong></div>
+          <div class="box">ROI: <strong>15%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan popular">
+          <h3>WEEKLY SILVER</h3>
+          <div class="price"><span class="rs">Rs</span> 3,000</div>
+          <div class="box">Total Profit: <strong>Rs 500</strong></div>
+          <div class="box">Duration: <strong>7 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 3,500</strong></div>
+          <div class="box">ROI: <strong>16.7%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan">
+          <h3>WEEKLY GOLD</h3>
+          <div class="price"><span class="rs">Rs</span> 5,000</div>
+          <div class="box">Total Profit: <strong>Rs 900</strong></div>
+          <div class="box">Duration: <strong>7 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 5,900</strong></div>
+          <div class="box">ROI: <strong>18%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIELD B - 15 Days -->
+    <div style="margin-bottom: 60px;">
+      <h3 style="text-align:center;font-size:28px;margin-bottom:10px;color:var(--accent-cyan);">
+        <i class="fas fa-calendar-alt"></i> Field B — 15-Day Packages
+      </h3>
+      <p style="text-align:center;color:var(--muted-text);margin-bottom:30px;">15-Day plans • Withdrawal at end only</p>
+      
+      <div class="plans">
+        <div class="plan">
+          <h3>15-DAY STARTER</h3>
+          <div class="price"><span class="rs">Rs</span> 3,000</div>
+          <div class="box">Total Profit: <strong>Rs 600</strong></div>
+          <div class="box">Duration: <strong>15 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 3,600</strong></div>
+          <div class="box">ROI: <strong>20%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan popular">
+          <h3>15-DAY PLUS</h3>
+          <div class="price"><span class="rs">Rs</span> 5,000</div>
+          <div class="box">Total Profit: <strong>Rs 1,200</strong></div>
+          <div class="box">Duration: <strong>15 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 6,200</strong></div>
+          <div class="box">ROI: <strong>24%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan">
+          <h3>15-DAY PREMIUM</h3>
+          <div class="price"><span class="rs">Rs</span> 10,000</div>
+          <div class="box">Total Profit: <strong>Rs 2,500</strong></div>
+          <div class="box">Duration: <strong>15 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 12,500</strong></div>
+          <div class="box">ROI: <strong>25%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONTHLY PACKAGES LEVEL 1 -->
+    <div style="margin-bottom: 60px;">
+      <h3 style="text-align:center;font-size:28px;margin-bottom:10px;color:var(--accent-green);">
+        <i class="fas fa-calendar-alt"></i> Field C — Monthly Packages (Level 1)
+      </h3>
+      <p style="text-align:center;color:var(--muted-text);margin-bottom:30px;">30-Day plans • Withdrawal on Day 30</p>
+      
+      <div class="plans">
+        <div class="plan">
+          <h3>MONTHLY BASIC</h3>
+          <div class="price"><span class="rs">Rs</span> 5,000</div>
+          <div class="box">Total Profit: <strong>Rs 1,500</strong></div>
+          <div class="box">Duration: <strong>30 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 6,500</strong></div>
+          <div class="box">ROI: <strong>30%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan">
+          <h3>MONTHLY STANDARD</h3>
+          <div class="price"><span class="rs">Rs</span> 10,000</div>
+          <div class="box">Total Profit: <strong>Rs 3,500</strong></div>
+          <div class="box">Duration: <strong>30 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 13,500</strong></div>
+          <div class="box">ROI: <strong>35%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan popular">
+          <h3>MONTHLY ADVANCED</h3>
+          <div class="price"><span class="rs">Rs</span> 15,000</div>
+          <div class="box">Total Profit: <strong>Rs 5,500</strong></div>
+          <div class="box">Duration: <strong>30 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 20,500</strong></div>
+          <div class="box">ROI: <strong>36.7%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan">
+          <h3>MONTHLY PRO</h3>
+          <div class="price"><span class="rs">Rs</span> 19,500</div>
+          <div class="box">Total Profit: <strong>Rs 7,500</strong></div>
+          <div class="box">Duration: <strong>30 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 27,000</strong></div>
+          <div class="box">ROI: <strong>38.5%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREMIUM MONTHLY -->
+    <div>
+      <h3 style="text-align:center;font-size:28px;margin-bottom:10px;color:var(--accent-green);">
+        <i class="fas fa-crown"></i> Field C — Premium Monthly (Level 2-4)
+      </h3>
+      <p style="text-align:center;color:var(--muted-text);margin-bottom:30px;">Higher returns • Withdrawal on Day 30</p>
+      
+      <div class="plans">
+        <div class="plan">
+          <h3>MONTHLY PREMIUM</h3>
+          <p style="text-align:center;color:var(--accent-cyan);font-weight:600;font-size:14px;">Level 2</p>
+          <div class="price"><span class="rs">Rs</span> 25,500</div>
+          <div class="box">Total Profit: <strong>Rs 10,000</strong></div>
+          <div class="box">Duration: <strong>30 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 35,500</strong></div>
+          <div class="box">ROI: <strong>39.2%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan">
+          <h3>MONTHLY PLATINUM</h3>
+          <p style="text-align:center;color:var(--accent-cyan);font-weight:600;font-size:14px;">Level 3</p>
+          <div class="price"><span class="rs">Rs</span> 30,500</div>
+          <div class="box">Total Profit: <strong>Rs 13,000</strong></div>
+          <div class="box">Duration: <strong>30 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 43,500</strong></div>
+          <div class="box">ROI: <strong>42.6%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan popular">
+          <h3>MONTHLY DIAMOND</h3>
+          <p style="text-align:center;color:var(--accent-cyan);font-weight:600;font-size:14px;">Level 4</p>
+          <div class="price"><span class="rs">Rs</span> 45,000</div>
+          <div class="box">Total Profit: <strong>Rs 20,000</strong></div>
+          <div class="box">Duration: <strong>30 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 65,000</strong></div>
+          <div class="box">ROI: <strong>44.4%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+
+        <div class="plan">
+          <h3>MONTHLY ELITE</h3>
+          <p style="text-align:center;color:var(--accent-cyan);font-weight:600;font-size:14px;">Level 4</p>
+          <div class="price"><span class="rs">Rs</span> 55,000</div>
+          <div class="box">Total Profit: <strong>Rs 27,000</strong></div>
+          <div class="box">Duration: <strong>30 Days</strong></div>
+          <div class="box">Total Return: <strong>Rs 82,000</strong></div>
+          <div class="box">ROI: <strong>49.1%</strong></div>
+          <button onclick="registerWithRef()">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PLATFORM STATS ===== -->
+  <section id="platform-stats">
+    <h2 class="section-title">Platform Statistics</h2>
+    <div class="platform-grid">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-wallet"></i></div>
+        <h3>Total Deposits</h3>
+        <p class="number"><span class="rs">Rs</span> <span data-live="deposit">0</span></p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+        <h3>Total Withdrawn</h3>
+        <p class="number"><span class="rs">Rs</span> <span data-live="withdraw">0</span></p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <h3>Active Investors</h3>
+        <p class="number"><span data-live="users">0</span>+</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer-hd">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h2><i class="fas fa-gem"></i> Rizq Digital</h2>
+        <p>A premium investment platform delivering smart, secure and high-return opportunities for global investors.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-box">
+        <h4>Quick Links</h4>
+        <p><a href="about-us.html"        style="color:inherit;text-decoration:none;"><i class="fas fa-info-circle"></i> About Us</a></p>
+        <p><a href="privacy-policy.html"  style="color:inherit;text-decoration:none;"><i class="fas fa-shield-alt"></i> Privacy Policy</a></p>
+        <p><a href="terms-conditions.html" style="color:inherit;text-decoration:none;"><i class="fas fa-file-contract"></i> Terms & Conditions</a></p>
+      </div>
+      
+      <div class="footer-box">
+        <h4>Contact & Support</h4>
+        <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/923274971244" target="_blank" style="color:inherit;text-decoration:none;">WhatsApp Support</a></p>
+        <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e695939696899492a6948f9c97828f818f92878ac8899481">[email&#160;protected]</a></p>
+      </div>
+      
+      <div class="footer-box">
+        <h4>Office Location</h4>
+        <p><i class="fas fa-map-marker-alt"></i><br>Islamabad, Pakistan<br>Serving clients nationwide</p>
+      </div>
+      
+      <div class="footer-bottom">
+        © 2026 Rizq Digital — All Rights Reserved | rizqdigital.org
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== WHATSAPP FLOAT ===== -->
+  <a href="https://wa.me/923274971244" class="whatsapp-float" target="_blank" aria-label="WhatsApp Support">
+    <span class="wa-tooltip">Chat with support!</span>
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ===== SCRIPTS ===== -->
+
+  <!-- Dark Mode -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function toggleDark() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark"));
+    }
+    if (localStorage.getItem("darkMode") === "true") document.body.classList.add("dark");
+  </script>
+
+  <!-- ✅ REF PASSTHROUGH SYSTEM
+       Reads ?ref= from URL on every page load.
+       - Shows a friendly banner so the visitor knows they came via invite
+       - Saves the ref code to sessionStorage so it survives navigation
+       - registerWithRef() goes to register.html?ref=CODE
+       - Works even if the user browses plans first then registers
+  -->
+  <script>
+    // ── Read ref from URL or sessionStorage ──────────────────────────
+    const urlParams  = new URLSearchParams(window.location.search);
+    const urlRef     = urlParams.get('ref');
+    const storedRef  = sessionStorage.getItem('pendingRef');
+    const activeRef  = urlRef || storedRef || null;
+
+    if (urlRef) {
+      // Fresh referral visit — persist it for the session
+      sessionStorage.setItem('pendingRef', urlRef);
+    }
+
+    if (activeRef) {
+      // Show the referral welcome banner
+      const banner = document.getElementById('refBanner');
+      document.getElementById('refCodeDisplay').textContent = activeRef.toUpperCase();
+      banner.classList.add('show');
+    }
+
+    // ── Navigate to register, carrying the ref code ───────────────────
+    function registerWithRef() {
+      const ref = activeRef;
+      if (ref) {
+        window.location.href = 'register.html?ref=' + encodeURIComponent(ref.toUpperCase());
+      } else {
+        window.location.href = 'register.html';
+      }
+    }
+  </script>
+
+  <!-- Live Statistics -->
+  <script>
+    // ✅ FIX: Always define minimums — stats never go below these
+    const DEFAULTS = { users: 695, deposit: 15630000, withdraw: 8950000, lastJoinMin: 8 };
+    const LIVE = { ...DEFAULTS };
+
+    // ✅ FIX: "0" as a string IS truthy in JS, so old broken code overwrote
+    // defaults with zero. Now we only restore from localStorage when the
+    // saved value is LARGER than our hard-coded default (floor).
+    Object.keys(LIVE).forEach(k => {
+      const saved = localStorage.getItem("stat_" + k);
+      const num   = Number(saved);
+      if (saved && num > DEFAULTS[k]) LIVE[k] = num;
+    });
+
+    // Clear any stale zeros from localStorage so they can't cause problems again
+    if (LIVE.users < DEFAULTS.users) { Object.keys(DEFAULTS).forEach(k => localStorage.removeItem("stat_" + k)); }
+
+    function saveStats() { Object.keys(LIVE).forEach(k => localStorage.setItem("stat_" + k, LIVE[k])); }
+
+    function formatNumber(n) { return Math.floor(n).toLocaleString(); }
+
+    function updateUI() {
+      document.querySelectorAll("[data-live]").forEach(el => {
+        const k = el.dataset.live;
+        if (LIVE[k] !== undefined) el.textContent = formatNumber(LIVE[k]);
+      });
+      const lj = document.getElementById("lastJoin");
+      if (lj) lj.textContent = LIVE.lastJoinMin;
+    }
+
+    function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+    setInterval(() => {
+      LIVE.deposit += rand(80, 140); LIVE.withdraw += rand(40, 100);
+      saveStats(); updateUI();
+    }, 5000);
+
+    function scheduleNextUser() {
+      const delay = rand(3, 8) * 60 * 1000; // 3–8 minutes between new "users"
+      setTimeout(() => {
+        LIVE.users += 1;
+        LIVE.lastJoinMin = rand(1, 3);
+        saveStats();
+        updateUI();
+        scheduleNextUser(); // schedule the next one
+      }, delay);
+    }
+
+    // ✅ Run UI update immediately on page load so stats show right away
+    updateUI();
+    scheduleNextUser();
+
+  </script>
+
+</body>
+</html>

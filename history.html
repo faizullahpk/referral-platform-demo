@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <title>History - Rizq Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary:#0a0e27; --bg-secondary:#141a3a;
+      --accent-green:#22c55e; --accent-cyan:#06b6d4; --accent-purple:#8b5cf6;
+      --text-primary:#f1f5f9; --text-muted:#94a3b8;
+      --glass-bg:rgba(255,255,255,0.05); --glass-border:rgba(255,255,255,0.1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:linear-gradient(135deg,#0a0e27 0%,#1a1f3a 50%,#0f1729 100%);color:var(--text-primary);min-height:100vh;overflow-x:hidden;padding-bottom:100px;position:relative;}
+    body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%,rgba(34,197,94,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(6,182,212,0.08) 0%,transparent 50%);z-index:-1;}
+    .container{max-width:430px;margin:0 auto;}
+    .header{background:rgba(10,14,39,0.8);backdrop-filter:blur(20px);padding:16px 20px;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--glass-border);}
+    .header-top{display:flex;justify-content:space-between;align-items:center;}
+    .logo-section{display:flex;align-items:center;gap:12px;}
+    .logo{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:white;box-shadow:0 8px 20px rgba(34,197,94,0.3);}
+    .brand-name{font-size:18px;font-weight:700;background:linear-gradient(135deg,#22c55e,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .page-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;}
+    .icon-btn{width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:var(--text-primary);cursor:pointer;transition:all 0.3s;text-decoration:none;}
+    .icon-btn:hover{background:rgba(34,197,94,0.1);border-color:var(--accent-green);}
+    .main-content{padding:20px;}
+
+    /* Summary strip */
+    .summary-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+    .sum-card{background:var(--glass-bg);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:16px;padding:14px;text-align:center;}
+    .sum-label{font-size:10px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;}
+    .sum-value{font-size:16px;font-weight:800;color:var(--accent-green);}
+
+    /* Tabs */
+    .tabs{display:flex;gap:0;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:14px;padding:4px;margin-bottom:20px;overflow-x:auto;}
+    .tab{flex:1;padding:9px 8px;border-radius:10px;border:none;background:transparent;color:var(--text-muted);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.3s;white-space:nowrap;}
+    .tab.active{background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));color:white;box-shadow:0 4px 12px rgba(34,197,94,0.3);}
+
+    /* Section */
+    .section{background:var(--glass-bg);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:18px;padding:20px;margin-bottom:20px;}
+    .section-title{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+    .title-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+
+    /* Transaction item */
+    .tx-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--glass-border);}
+    .tx-item:last-child{border-bottom:none;padding-bottom:0;}
+    .tx-item:first-child{padding-top:0;}
+    .tx-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .tx-icon.deposit{background:rgba(34,197,94,0.15);}
+    .tx-icon.withdrawal{background:rgba(239,68,68,0.15);}
+    .tx-icon.profit{background:rgba(6,182,212,0.15);}
+    .tx-icon.commission{background:rgba(139,92,246,0.15);}
+    .tx-body{flex:1;min-width:0;}
+    .tx-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:3px;}
+    .tx-sub{font-size:11px;color:var(--text-muted);}
+    .tx-right{text-align:right;flex-shrink:0;}
+    .tx-amount{font-size:14px;font-weight:800;}
+    .tx-amount.green{color:var(--accent-green);}
+    .tx-amount.red{color:#ef4444;}
+    .tx-amount.cyan{color:var(--accent-cyan);}
+    .tx-amount.purple{color:var(--accent-purple);}
+    .tx-status{font-size:10px;font-weight:600;padding:3px 8px;border-radius:10px;margin-top:4px;display:inline-block;}
+    .status-approved,.status-paid{background:rgba(34,197,94,0.15);color:var(--accent-green);}
+    .status-pending{background:rgba(234,179,8,0.15);color:#eab308;}
+    .status-rejected{background:rgba(239,68,68,0.15);color:#ef4444;}
+
+    /* TX ID badge */
+    .tx-id{font-size:10px;color:var(--text-muted);margin-top:3px;font-family:monospace;}
+
+    /* Bottom nav */
+    .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(10,14,39,0.95);backdrop-filter:blur(20px);border-top:1px solid var(--glass-border);padding:12px 20px;display:flex;justify-content:space-around;z-index:100;box-shadow:0 -10px 30px rgba(0,0,0,0.3);border-radius:24px 24px 0 0;}
+    .nav-item{text-decoration:none;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:4px;transition:all 0.3s;padding:6px 12px;border-radius:12px;}
+    .nav-item.active{color:var(--accent-green);background:rgba(34,197,94,0.1);}
+    .nav-icon{font-size:20px;} .nav-label{font-size:10px;font-weight:600;}
+
+    /* Toast */
+    .toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);background:rgba(34,197,94,0.95);backdrop-filter:blur(10px);color:white;padding:14px 24px;border-radius:12px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:all 0.3s;z-index:9999;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    .loading{text-align:center;padding:30px;color:var(--text-muted);}
+    .spinner{border:3px solid rgba(255,255,255,0.1);border-top:3px solid var(--accent-green);border-radius:50%;width:36px;height:36px;animation:spin 1s linear infinite;margin:0 auto 12px;}
+    @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+    .no-data{text-align:center;padding:30px 20px;color:var(--text-muted);}
+    .no-data i{font-size:40px;opacity:0.3;display:block;margin-bottom:10px;}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div class="logo-section">
+        <div class="logo">R</div>
+        <div>
+          <div class="brand-name">Rizq Digital</div>
+          <div class="page-subtitle">Transaction History</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <a href="dashboard.html" class="icon-btn"><i class="fas fa-arrow-left"></i></a>
+        <button class="icon-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-content">
+
+      <!-- Summary strip -->
+      <div class="summary-strip">
+        <div class="sum-card">
+          <div class="sum-label">Deposited</div>
+          <div class="sum-value">Rs <span id="sumDeposited">0</span></div>
+        </div>
+        <div class="sum-card">
+          <div class="sum-label">Withdrawn</div>
+          <div class="sum-value" style="color:#ef4444;">Rs <span id="sumWithdrawn">0</span></div>
+        </div>
+        <div class="sum-card">
+          <div class="sum-label">Commissions</div>
+          <div class="sum-value" style="color:var(--accent-purple);">Rs <span id="sumCommissions">0</span></div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('all',this)">All</button>
+        <button class="tab" onclick="switchTab('deposits',this)">Deposits</button>
+        <button class="tab" onclick="switchTab('withdrawals',this)">Withdrawals</button>
+        <button class="tab" onclick="switchTab('commissions',this)">Commissions</button>
+      </div>
+
+      <!-- List -->
+      <div class="section">
+        <div class="section-title">
+          <div class="title-icon">📋</div>
+          <span id="sectionLabel">All Transactions</span>
+        </div>
+        <div id="txContainer">
+          <div class="loading"><div class="spinner"></div>Loading history...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item"><i class="nav-icon fas fa-home"></i><span class="nav-label">Dashboard</span></a>
+    <a href="plans.html" class="nav-item"><i class="nav-icon fas fa-layer-group"></i><span class="nav-label">Plans</span></a>
+    <a href="my-team.html" class="nav-item"><i class="nav-icon fas fa-users"></i><span class="nav-label">My Team</span></a>
+    <a href="withdraw.html" class="nav-item"><i class="nav-icon fas fa-wallet"></i><span class="nav-label">Withdraw</span></a>
+  </nav>
+
+  <div class="toast" id="toast"><span id="toastMessage"></span></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, collection, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+
+    let currentUser = null;
+    let allTx = [];
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = "login.html"; return; }
+      currentUser = user;
+      await loadAll();
+    });
+
+    async function loadAll() {
+      try {
+        const [paymentsSnap, withdrawalsSnap, commissionsSnap] = await Promise.all([
+          getDocs(query(collection(db, "payments"), where("email", "==", currentUser.email))),
+          getDocs(query(collection(db, "withdrawals"), where("userId", "==", currentUser.uid))),
+          getDocs(query(collection(db, "commissions"), where("referrerId", "==", currentUser.uid)))
+        ]);
+
+        let totalDeposited = 0, totalWithdrawn = 0, totalCommissions = 0;
+        allTx = [];
+
+        paymentsSnap.forEach(d => {
+          const p = d.data();
+          if (p.status === "approved") totalDeposited += (p.amount || 0);
+          allTx.push({
+            type: "deposit",
+            title: `Deposit — ${p.planName || "Plan"}`,
+            sub: `Ref: ${d.id.slice(0,8).toUpperCase()} · TxID: ${p.transactionId || "N/A"}`,
+            amount: p.amount || 0,
+            status: p.status || "pending",
+            date: p.createdAt || null,
+            txId: p.transactionId || null
+          });
+        });
+
+        withdrawalsSnap.forEach(d => {
+          const w = d.data();
+          if (w.status === "approved") totalWithdrawn += (w.amount || 0);
+          allTx.push({
+            type: "withdrawal",
+            title: `Withdrawal`,
+            sub: `JazzCash: ${w.account || "N/A"}`,
+            amount: w.amount || 0,
+            status: w.status || "pending",
+            date: w.date || null,
+            txId: w.transactionId || null,
+            rejectionReason: w.rejectionReason || null
+          });
+        });
+
+        commissionsSnap.forEach(d => {
+          const c = d.data();
+          totalCommissions += (c.commissionAmount || 0);
+          allTx.push({
+            type: "commission",
+            title: `Referral Commission`,
+            sub: `From: ${c.referredUserEmail || "Team member"} · Deposit: Rs ${fmt(c.depositAmount || 0)}`,
+            amount: c.commissionAmount || 0,
+            status: "paid",
+            date: c.createdAt || null,
+            txId: null
+          });
+        });
+
+        // Sort newest first
+        allTx.sort((a, b) => toDate(b.date) - toDate(a.date));
+
+        document.getElementById("sumDeposited").textContent   = fmt(totalDeposited);
+        document.getElementById("sumWithdrawn").textContent   = fmt(totalWithdrawn);
+        document.getElementById("sumCommissions").textContent = fmt(totalCommissions);
+
+        renderTx(allTx);
+      } catch (err) {
+        console.error(err);
+        document.getElementById("txContainer").innerHTML = `<div class="no-data"><i class="fas fa-exclamation-circle"></i><p>Error loading history. Please refresh.</p></div>`;
+      }
+    }
+
+    window.switchTab = function(type, btn) {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const labels = {all:'All Transactions',deposits:'Deposit History',withdrawals:'Withdrawal History',commissions:'Commission History'};
+      document.getElementById("sectionLabel").textContent = labels[type];
+      const filtered = type === 'all' ? allTx : allTx.filter(t => t.type === type.slice(0,-1) || t.type === type.replace(/s$/,''));
+      // fix: match type names
+      const typeMap = {deposits:'deposit',withdrawals:'withdrawal',commissions:'commission'};
+      const f = type === 'all' ? allTx : allTx.filter(t => t.type === typeMap[type]);
+      renderTx(f);
+    };
+
+    function renderTx(list) {
+      const container = document.getElementById("txContainer");
+      if (list.length === 0) {
+        container.innerHTML = `<div class="no-data"><i class="fas fa-inbox"></i><p>No transactions found.</p></div>`;
+        return;
+      }
+      const icons = { deposit:'💰', withdrawal:'💸', commission:'🎁' };
+      const iconClass = { deposit:'deposit', withdrawal:'withdrawal', commission:'commission' };
+      const amtClass = { deposit:'green', withdrawal:'red', commission:'purple' };
+      const amtPrefix = { deposit:'+', withdrawal:'−', commission:'+' };
+
+      let html = '';
+      list.forEach(tx => {
+        const dateStr = formatDate(tx.date);
+        const txIdRow = tx.txId ? `<div class="tx-id"><i class="fas fa-hashtag" style="font-size:9px;"></i> ${tx.txId}</div>` : '';
+        const rejRow  = tx.rejectionReason ? `<div style="font-size:10px;color:#ef4444;margin-top:2px;"><i class="fas fa-times-circle"></i> ${tx.rejectionReason}</div>` : '';
+        html += `
+          <div class="tx-item">
+            <div class="tx-icon ${iconClass[tx.type]}">${icons[tx.type]}</div>
+            <div class="tx-body">
+              <div class="tx-title">${tx.title}</div>
+              <div class="tx-sub">${tx.sub}</div>
+              ${txIdRow}${rejRow}
+              <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">${dateStr}</div>
+            </div>
+            <div class="tx-right">
+              <div class="tx-amount ${amtClass[tx.type]}">${amtPrefix[tx.type]} Rs ${fmt(tx.amount)}</div>
+              <div class="tx-status status-${tx.status}">${tx.status}</div>
+            </div>
+          </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function fmt(n) { return Number(n||0).toLocaleString('en-PK',{maximumFractionDigits:0}); }
+    function toDate(v) { if(!v) return 0; try{ return v.toDate ? v.toDate().getTime() : new Date(v).getTime(); } catch{ return 0; } }
+    function formatDate(v) {
+      if (!v) return 'N/A';
+      try {
+        const d = v.toDate ? v.toDate() : new Date(v);
+        return d.toLocaleDateString('en-PK',{day:'numeric',month:'short',year:'numeric'}) + ' ' + d.toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit'});
+      } catch { return 'N/A'; }
+    }
+
+    window.logout = () => signOut(auth).then(() => window.location.href = "index.html");
+  </script>
+</body>
+</html>

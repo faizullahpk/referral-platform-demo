@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login - Rizq Digital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      min-height: 100vh; display: flex; justify-content: center; align-items: center;
+      background: linear-gradient(135deg, #0a0e27, #1a1f3a); overflow: hidden;
+    }
+
+    .glow-bg {
+      position: absolute; width: 400px; height: 400px;
+      background: #22c55e; filter: blur(150px); opacity: 0.2;
+      animation: float 6s infinite alternate;
+    }
+
+    @keyframes float { from { transform: translateY(-40px); } to { transform: translateY(40px); } }
+
+    .login-box {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 420px; padding: 40px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      box-shadow: 0 0 40px rgba(34, 197, 94, 0.3);
+      text-align: center; color: #e5e7eb;
+    }
+
+    .admin-icon {
+      width: 80px; height: 80px; margin: 0 auto 20px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 36px; color: white; box-shadow: 0 10px 30px rgba(34,197,94,0.4);
+    }
+
+    h2 {
+      margin-bottom: 8px; font-size: 28px;
+      background: linear-gradient(135deg, #22c55e, #06b6d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle { color: #94a3b8; font-size: 13px; margin-bottom: 28px; }
+
+    .error-message {
+      background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.4);
+      color: #fca5a5; padding: 12px 16px; border-radius: 12px; margin-bottom: 20px;
+      font-size: 14px; display: none; align-items: center; gap: 10px; text-align: left;
+    }
+
+    .error-message.show { display: flex; }
+
+    .input-group { position: relative; margin-bottom: 20px; }
+
+    .input-group i {
+      position: absolute; top: 50%; left: 14px; transform: translateY(-50%);
+      color: #22c55e; z-index: 1;
+    }
+
+    .input-group input {
+      width: 100%; padding: 14px 14px 14px 42px;
+      border-radius: 12px; border: 1px solid rgba(34,197,94,0.3);
+      background: rgba(0,0,0,0.4); color: #e5e7eb; outline: none; font-size: 14px;
+      transition: all 0.3s; font-family: 'Poppins', sans-serif;
+    }
+
+    .input-group input::placeholder { color: #475569; }
+
+    .input-group input:focus {
+      border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.1);
+    }
+
+    .toggle-password {
+      position: absolute; top: 50%; right: 14px; transform: translateY(-50%);
+      color: #475569; cursor: pointer; background: none; border: none; font-size: 14px;
+    }
+
+    .toggle-password:hover { color: #22c55e; }
+
+    button[type="submit"] {
+      width: 100%; padding: 14px; border-radius: 12px; border: none;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white; font-weight: 700; font-size: 16px; cursor: pointer;
+      transition: all 0.3s; font-family: 'Poppins', sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 8px 20px rgba(34,197,94,0.3);
+    }
+
+    button[type="submit"]:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(34,197,94,0.4); }
+    button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  </style>
+</head>
+<body>
+
+  <div class="glow-bg"></div>
+
+  <div class="login-box">
+    <div class="admin-icon"><i class="fas fa-shield-halved"></i></div>
+    <h2>Admin Access</h2>
+    <p class="subtitle">Rizq Digital — Restricted Area</p>
+
+    <div id="errorMessage" class="error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="errorText">Error</span>
+    </div>
+
+    <form id="loginForm">
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="email" placeholder="Admin Email" required autocomplete="email">
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+        <button type="button" class="toggle-password" onclick="togglePass()">
+          <i class="fas fa-eye" id="eyeIcon"></i>
+        </button>
+      </div>
+
+      <button type="submit" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i> Login to Admin Panel
+      </button>
+    </form>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const errorDiv  = document.getElementById("errorMessage");
+    const errorText = document.getElementById("errorText");
+    const loginBtn  = document.getElementById("loginBtn");
+
+    function showError(msg) {
+      errorText.textContent = msg;
+      errorDiv.classList.add("show");
+      setTimeout(() => errorDiv.classList.remove("show"), 5000);
+    }
+
+    window.togglePass = function() {
+      const pwd  = document.getElementById("password");
+      const icon = document.getElementById("eyeIcon");
+      if (pwd.type === "password") {
+        pwd.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+      } else {
+        pwd.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+      }
+    };
+
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email    = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      // ✅ FIX: Only one layer of email check here (the real guard is in admin.html via onAuthStateChanged)
+      // NOTE: For production, use Firebase Custom Claims instead of email comparison
+      const ADMIN_EMAILS = ["admin@rizqdigital.com"];
+      if (!ADMIN_EMAILS.includes(email)) {
+        showError("Access denied. Admin credentials required.");
+        return;
+      }
+
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = "admin.html";
+      } catch (err) {
+        let msg = "Invalid credentials. Please try again.";
+        if (err.code === "auth/wrong-password")    msg = "Incorrect password.";
+        if (err.code === "auth/user-not-found")    msg = "Admin account not found.";
+        if (err.code === "auth/too-many-requests") msg = "Too many attempts. Try later.";
+        if (err.code === "auth/invalid-credential") msg = "Invalid email or password.";
+        showError(msg);
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Admin Panel';
+      }
+    });
+  </script>
+
+</body>
+</html>

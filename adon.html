@@ -1,0 +1,172 @@
+<!-- ADD THIS NEW TAB SECTION TO YOUR ADMIN.HTML -->
+<!-- Place this after the "Rejected" tab in the tabs section -->
+
+<!-- In the tabs div, add this new tab button: -->
+<button class="tab" onclick="switchTab('withdrawals')">
+  💰 Withdrawals (<span id="pendingWithdrawalsCount">0</span>)
+</button>
+
+<!-- In the tab-content section, add this new content div: -->
+<div id="withdrawals-content" class="tab-content">
+  <div class="requests-grid" id="withdrawalRequests">
+    <div class="empty-state">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>Loading withdrawal requests...</p>
+    </div>
+  </div>
+</div>
+
+<!-- ADD THIS JAVASCRIPT TO YOUR ADMIN.HTML SCRIPT SECTION -->
+<script>
+// Add to your existing Firebase imports
+import { updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// Load withdrawal requests
+async function loadWithdrawalRequests() {
+  const container = document.getElementById("withdrawalRequests");
+  try {
+    const q = query(
+      collection(db, "withdrawals"),
+      where("status", "==", "pending")
+    );
+    const snapshot = await getDocs(q);
+
+    // Update count
+    document.getElementById("pendingWithdrawalsCount").textContent = snapshot.size;
+
+    if (snapshot.empty) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-wallet"></i>
+          <p>No pending withdrawal requests</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = "";
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      container.innerHTML += createWithdrawalCard(doc.id, data);
+    });
+  } catch (error) {
+    console.error("Error loading withdrawals:", error);
+    container.innerHTML = `<div class="empty-state"><p>Error loading withdrawal requests</p></div>`;
+  }
+}
+
+// Create withdrawal card HTML
+function createWithdrawalCard(id, data) {
+  const date = data.date ? new Date(data.date).toLocaleString() : "N/A";
+  
+  return `
+    <div class="request-card">
+      <div class="request-header">
+        <div class="user-info">
+          <h3>${data.email || "Unknown"}</h3>
+          <p>Requested: ${date}</p>
+        </div>
+        <span class="status-badge status-pending">PENDING</span>
+      </div>
+
+      <div class="request-details">
+        <div class="detail-item">
+          <div class="detail-label">Withdrawal Amount</div>
+          <div class="detail-value">Rs ${(data.amount || 0).toLocaleString()}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">JazzCash Account</div>
+          <div class="detail-value">${data.account || "N/A"}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">User ID</div>
+          <div class="detail-value" style="font-size: 12px; word-break: break-all;">${data.userId || "N/A"}</div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-approve" onclick="approveWithdrawal('${id}', '${data.userId}', ${data.amount}, '${data.email}')">
+          <i class="fas fa-check"></i> Approve & Send Money
+        </button>
+        <button class="btn btn-reject" onclick="rejectWithdrawal('${id}')">
+          <i class="fas fa-times"></i> Reject
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// Approve withdrawal
+window.approveWithdrawal = async function(withdrawalId, userId, amount, email) {
+  const transactionId = prompt("Enter JazzCash transaction ID after sending money:");
+  if (!transactionId) return;
+
+  if (!confirm(`Confirm: Money sent to user via JazzCash?\nAmount: Rs ${amount.toLocaleString()}\nTransaction ID: ${transactionId}`)) {
+    return;
+  }
+
+  try {
+    // Update withdrawal status
+    await updateDoc(doc(db, "withdrawals", withdrawalId), {
+      status: "approved",
+      processedAt: new Date().toISOString(),
+      processedBy: auth.currentUser.email,
+      transactionId: transactionId
+    });
+
+    // Get user's current balance
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+    
+    if (!userSnap.exists()) {
+      alert("User not found!");
+      return;
+    }
+
+    const userData = userSnap.data();
+    const newBalance = (userData.balance || 0) - amount;
+    const newTotalWithdrawn = (userData.totalWithdrawn || 0) + amount;
+
+    // Update user balance
+    await updateDoc(userRef, {
+      balance: Math.max(0, newBalance),
+      totalWithdrawn: newTotalWithdrawn
+    });
+
+    alert("Withdrawal approved successfully!");
+    loadDashboard();
+
+  } catch (error) {
+    console.error("Error approving withdrawal:", error);
+    alert("Error: " + error.message);
+  }
+};
+
+// Reject withdrawal
+window.rejectWithdrawal = async function(withdrawalId) {
+  const reason = prompt("Enter rejection reason:");
+  if (!reason) return;
+
+  try {
+    await updateDoc(doc(db, "withdrawals", withdrawalId), {
+      status: "rejected",
+      processedAt: new Date().toISOString(),
+      processedBy: auth.currentUser.email,
+      rejectionReason: reason
+    });
+
+    alert("Withdrawal rejected");
+    loadDashboard();
+  } catch (error) {
+    console.error("Error rejecting withdrawal:", error);
+    alert("Error: " + error.message);
+  }
+};
+
+// Update loadDashboard function to include withdrawals
+// Find your existing loadDashboard function and add this line:
+await loadWithdrawalRequests();
+
+// Update switchTab function to handle withdrawals tab
+// Your existing switchTab function should already work, but ensure it handles 'withdrawals'
+</script>

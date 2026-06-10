@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <title>Reports - Rizq Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{--bg-primary:#0a0e27;--bg-secondary:#141a3a;--accent-green:#22c55e;--accent-cyan:#06b6d4;--accent-purple:#8b5cf6;--text-primary:#f1f5f9;--text-muted:#94a3b8;--glass-bg:rgba(255,255,255,0.05);--glass-border:rgba(255,255,255,0.1);}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:linear-gradient(135deg,#0a0e27 0%,#1a1f3a 50%,#0f1729 100%);color:var(--text-primary);min-height:100vh;overflow-x:hidden;padding-bottom:100px;}
+    body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%,rgba(34,197,94,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(6,182,212,0.08) 0%,transparent 50%);z-index:-1;}
+    .container{max-width:430px;margin:0 auto;}
+    .header{background:rgba(10,14,39,0.8);backdrop-filter:blur(20px);padding:16px 20px;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--glass-border);}
+    .header-top{display:flex;justify-content:space-between;align-items:center;}
+    .logo-section{display:flex;align-items:center;gap:12px;}
+    .logo{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:white;box-shadow:0 8px 20px rgba(34,197,94,0.3);}
+    .brand-name{font-size:18px;font-weight:700;background:linear-gradient(135deg,#22c55e,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .page-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;}
+    .icon-btn{width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:var(--text-primary);cursor:pointer;transition:all 0.3s;text-decoration:none;}
+    .icon-btn:hover{background:rgba(34,197,94,0.1);border-color:var(--accent-green);}
+    .main-content{padding:20px;}
+
+    /* Big earnings card */
+    .earn-card{background:linear-gradient(135deg,#22c55e 0%,#16a34a 100%);border-radius:24px;padding:24px;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(34,197,94,0.3);}
+    .earn-card::after{content:'';position:absolute;width:250px;height:250px;background:rgba(255,255,255,0.1);border-radius:50%;top:-120px;right:-80px;}
+    .earn-label{position:relative;z-index:2;font-size:12px;color:rgba(255,255,255,0.8);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+    .earn-amount{position:relative;z-index:2;font-size:36px;font-weight:800;color:white;margin-bottom:4px;}
+    .earn-sub{position:relative;z-index:2;font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:20px;}
+    .earn-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+    .earn-stat{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:10px;text-align:center;}
+    .earn-stat-val{font-size:15px;font-weight:800;color:white;}
+    .earn-stat-lbl{font-size:10px;color:rgba(255,255,255,0.8);margin-top:2px;}
+
+    .section{background:var(--glass-bg);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:18px;padding:20px;margin-bottom:16px;}
+    .section-title{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+    .title-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+
+    /* ROI bar */
+    .roi-row{margin-bottom:14px;}
+    .roi-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+    .roi-label{font-size:13px;font-weight:600;}
+    .roi-pct{font-size:13px;font-weight:800;color:var(--accent-green);}
+    .roi-bar{height:8px;background:rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;}
+    .roi-fill{height:100%;background:linear-gradient(90deg,var(--accent-green),var(--accent-cyan));border-radius:20px;transition:width 1s ease;}
+
+    /* Plan progress cards */
+    .plan-report{background:rgba(255,255,255,0.03);border:1px solid var(--glass-border);border-radius:14px;padding:16px;margin-bottom:12px;}
+    .plan-report:last-child{margin-bottom:0;}
+    .pr-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+    .pr-name{font-size:14px;font-weight:700;color:var(--accent-green);}
+    .pr-status{font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;}
+    .pr-status.active{background:rgba(34,197,94,0.2);color:var(--accent-green);}
+    .pr-status.completed{background:rgba(148,163,184,0.2);color:var(--text-muted);}
+    .pr-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px;}
+    .pr-stat{font-size:11px;color:var(--text-muted);}
+    .pr-stat-val{font-size:13px;font-weight:700;color:var(--text-primary);margin-top:2px;}
+    .progress-bar{height:6px;background:rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent-green),var(--accent-cyan));border-radius:20px;}
+    .pr-pct{font-size:10px;color:var(--text-muted);text-align:right;margin-top:4px;}
+
+    /* Bottom nav */
+    .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(10,14,39,0.95);backdrop-filter:blur(20px);border-top:1px solid var(--glass-border);padding:12px 20px;display:flex;justify-content:space-around;z-index:100;border-radius:24px 24px 0 0;}
+    .nav-item{text-decoration:none;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:4px;transition:all 0.3s;padding:6px 12px;border-radius:12px;}
+    .nav-item.active{color:var(--accent-green);background:rgba(34,197,94,0.1);}
+    .nav-icon{font-size:20px;} .nav-label{font-size:10px;font-weight:600;}
+    .spinner{border:3px solid rgba(255,255,255,0.1);border-top:3px solid var(--accent-green);border-radius:50%;width:36px;height:36px;animation:spin 1s linear infinite;margin:20px auto;}
+    @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+    .no-data{text-align:center;padding:30px 20px;color:var(--text-muted);}
+    .no-data i{font-size:40px;opacity:0.3;display:block;margin-bottom:10px;}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div class="logo-section">
+        <div class="logo">R</div>
+        <div>
+          <div class="brand-name">Rizq Digital</div>
+          <div class="page-subtitle">Reports & Analytics</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <a href="dashboard.html" class="icon-btn"><i class="fas fa-arrow-left"></i></a>
+        <button class="icon-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-content">
+
+      <!-- Big earn card -->
+      <div class="earn-card">
+        <div class="earn-label">Total Lifetime Earnings</div>
+        <div class="earn-amount">Rs <span id="totalEarned">0</span></div>
+        <div class="earn-sub">Since you joined Rizq Digital</div>
+        <div class="earn-grid">
+          <div class="earn-stat"><div class="earn-stat-val" id="cardInvested">0</div><div class="earn-stat-lbl">Invested</div></div>
+          <div class="earn-stat"><div class="earn-stat-val" id="cardWithdrawn">0</div><div class="earn-stat-lbl">Withdrawn</div></div>
+          <div class="earn-stat"><div class="earn-stat-val" id="cardBonus">0</div><div class="earn-stat-lbl">Team Bonus</div></div>
+        </div>
+      </div>
+
+      <!-- ROI section -->
+      <div class="section">
+        <div class="section-title"><div class="title-icon">📈</div>Performance Overview</div>
+        <div id="roiContainer"><div class="spinner"></div></div>
+      </div>
+
+      <!-- Active plans -->
+      <div class="section">
+        <div class="section-title"><div class="title-icon">💼</div>Investment Plans</div>
+        <div id="plansContainer"><div class="spinner"></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item"><i class="nav-icon fas fa-home"></i><span class="nav-label">Dashboard</span></a>
+    <a href="plans.html" class="nav-item"><i class="nav-icon fas fa-layer-group"></i><span class="nav-label">Plans</span></a>
+    <a href="my-team.html" class="nav-item"><i class="nav-icon fas fa-users"></i><span class="nav-label">My Team</span></a>
+    <a href="withdraw.html" class="nav-item"><i class="nav-icon fas fa-wallet"></i><span class="nav-label">Withdraw</span></a>
+  </nav>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+    const app=initializeApp(firebaseConfig); const auth=getAuth(app); const db=getFirestore(app);
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href="login.html"; return; }
+      const [userSnap, plansSnap] = await Promise.all([
+        getDoc(doc(db,"users",user.uid)),
+        getDocs(query(collection(db,"plans"),where("userId","==",user.uid)))
+      ]);
+      if (!userSnap.exists()) return;
+      const u = userSnap.data();
+
+      document.getElementById("totalEarned").textContent  = fmt(u.totalEarned);
+      document.getElementById("cardInvested").textContent = "Rs"+fmt(u.totalInvested);
+      document.getElementById("cardWithdrawn").textContent= "Rs"+fmt(u.totalWithdrawn);
+      document.getElementById("cardBonus").textContent    = "Rs"+fmt(u.teamBonus);
+
+      // ROI
+      const roi = u.totalInvested > 0 ? ((u.totalEarned / u.totalInvested)*100) : 0;
+      const profitRoi = u.totalInvested > 0 ? (((u.totalEarned - u.teamBonus) / u.totalInvested)*100) : 0;
+      const referralShare = u.totalEarned > 0 ? ((u.teamBonus / u.totalEarned)*100) : 0;
+      document.getElementById("roiContainer").innerHTML = `
+        <div class="roi-row">
+          <div class="roi-header"><span class="roi-label">Overall ROI</span><span class="roi-pct">${roi.toFixed(1)}%</span></div>
+          <div class="roi-bar"><div class="roi-fill" style="width:${Math.min(roi,200)/2}%"></div></div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-header"><span class="roi-label">Plan Profit ROI</span><span class="roi-pct">${profitRoi.toFixed(1)}%</span></div>
+          <div class="roi-bar"><div class="roi-fill" style="width:${Math.min(profitRoi,200)/2}%"></div></div>
+        </div>
+        <div class="roi-row" style="margin-bottom:0;">
+          <div class="roi-header"><span class="roi-label">Referral Share of Earnings</span><span class="roi-pct">${referralShare.toFixed(1)}%</span></div>
+          <div class="roi-bar"><div class="roi-fill" style="width:${referralShare}%"></div></div>
+        </div>`;
+
+      // Plans
+      if (plansSnap.empty) {
+        document.getElementById("plansContainer").innerHTML=`<div class="no-data"><i class="fas fa-inbox"></i><p>No plans yet. <a href="plans.html" style="color:var(--accent-green);">Start investing →</a></p></div>`;
+        return;
+      }
+      let html = '';
+      plansSnap.forEach(d => {
+        const p = d.data();
+        const total = p.daysTotal || 30;
+        const done  = total - (p.daysRemaining || 0);
+        const pct   = Math.min((done/total)*100,100);
+        const earned= done * (p.dailyProfit || 0);
+        const endDate = estimateEnd(p.createdAt, total);
+        html += `
+          <div class="plan-report">
+            <div class="pr-header">
+              <div class="pr-name">${p.planName}</div>
+              <div class="pr-status ${p.status || 'active'}">${(p.status||'active').toUpperCase()}</div>
+            </div>
+            <div class="pr-stats">
+              <div class="pr-stat">Invested<div class="pr-stat-val">Rs ${fmt(p.investment)}</div></div>
+              <div class="pr-stat">Daily Profit<div class="pr-stat-val" style="color:var(--accent-green);">Rs ${fmt(p.dailyProfit)}</div></div>
+              <div class="pr-stat">Earned So Far<div class="pr-stat-val">Rs ${fmt(earned)}</div></div>
+              <div class="pr-stat">Total Return<div class="pr-stat-val">Rs ${fmt(p.totalReturn)}</div></div>
+              <div class="pr-stat">Days Left<div class="pr-stat-val">${p.daysRemaining || 0}</div></div>
+              <div class="pr-stat">End Date<div class="pr-stat-val">${endDate}</div></div>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+            <div class="pr-pct">${Math.round(pct)}% complete</div>
+          </div>`;
+      });
+      document.getElementById("plansContainer").innerHTML = html;
+    });
+
+    function fmt(n){return Number(n||0).toLocaleString('en-PK',{maximumFractionDigits:0});}
+    function estimateEnd(val,days){
+      try{const d=val?.toDate?val.toDate():new Date(val);d.setDate(d.getDate()+days);return d.toLocaleDateString('en-PK',{day:'numeric',month:'short',year:'numeric'});}catch{return'N/A';}
+    }
+    window.logout=()=>signOut(auth).then(()=>window.location.href="index.html");
+  </script>
+</body>
+</html>

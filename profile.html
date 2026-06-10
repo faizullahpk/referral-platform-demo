@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <title>Profile - Rizq Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary:#0a0e27; --bg-secondary:#141a3a;
+      --accent-green:#22c55e; --accent-cyan:#06b6d4; --accent-purple:#8b5cf6;
+      --text-primary:#f1f5f9; --text-muted:#94a3b8;
+      --glass-bg:rgba(255,255,255,0.05); --glass-border:rgba(255,255,255,0.1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:linear-gradient(135deg,#0a0e27 0%,#1a1f3a 50%,#0f1729 100%);color:var(--text-primary);min-height:100vh;overflow-x:hidden;padding-bottom:100px;}
+    body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%,rgba(34,197,94,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(6,182,212,0.08) 0%,transparent 50%);z-index:-1;}
+    .container{max-width:430px;margin:0 auto;}
+    .header{background:rgba(10,14,39,0.8);backdrop-filter:blur(20px);padding:16px 20px;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--glass-border);}
+    .header-top{display:flex;justify-content:space-between;align-items:center;}
+    .logo-section{display:flex;align-items:center;gap:12px;}
+    .logo{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:white;box-shadow:0 8px 20px rgba(34,197,94,0.3);}
+    .brand-name{font-size:18px;font-weight:700;background:linear-gradient(135deg,#22c55e,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .page-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;}
+    .icon-btn{width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:var(--text-primary);cursor:pointer;transition:all 0.3s;text-decoration:none;}
+    .icon-btn:hover{background:rgba(34,197,94,0.1);border-color:var(--accent-green);}
+    .main-content{padding:20px;}
+
+    /* Avatar */
+    .avatar-section{text-align:center;margin-bottom:24px;}
+    .avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;color:white;margin:0 auto 12px;box-shadow:0 12px 30px rgba(34,197,94,0.35);}
+    .avatar-name{font-size:20px;font-weight:700;}
+    .avatar-email{font-size:13px;color:var(--text-muted);margin-top:4px;}
+    .member-since{font-size:11px;color:var(--text-muted);margin-top:6px;}
+    .level-badge{display:inline-block;margin-top:8px;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));color:white;}
+
+    /* Section */
+    .section{background:var(--glass-bg);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:18px;padding:20px;margin-bottom:16px;}
+    .section-title{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+    .title-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+
+    /* Form */
+    .form-group{margin-bottom:16px;}
+    .form-label{font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:6px;display:block;text-transform:uppercase;letter-spacing:0.4px;}
+    .form-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);border-radius:12px;padding:13px 16px;color:var(--text-primary);font-size:14px;outline:none;transition:all 0.3s;font-family:'Poppins',sans-serif;}
+    .form-input:focus{border-color:var(--accent-green);background:rgba(34,197,94,0.05);}
+    .form-input:disabled{opacity:0.5;cursor:not-allowed;}
+    .input-icon-wrap{position:relative;}
+    .input-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:14px;cursor:pointer;}
+    .input-icon:hover{color:var(--accent-green);}
+
+    .save-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));border:none;border-radius:14px;color:white;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.3s;box-shadow:0 8px 20px rgba(34,197,94,0.3);font-family:'Poppins',sans-serif;}
+    .save-btn:active{transform:scale(0.97);}
+    .save-btn:disabled{opacity:0.6;cursor:not-allowed;}
+
+    /* Info row */
+    .info-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--glass-border);}
+    .info-row:last-child{border-bottom:none;padding-bottom:0;}
+    .info-row:first-child{padding-top:0;}
+    .info-label{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px;}
+    .info-label i{color:var(--accent-green);}
+    .info-value{font-size:13px;font-weight:600;color:var(--text-primary);}
+
+    /* Danger zone */
+    .danger-btn{width:100%;padding:12px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:14px;color:#ef4444;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.3s;font-family:'Poppins',sans-serif;margin-top:10px;}
+    .danger-btn:hover{background:rgba(239,68,68,0.2);}
+
+    /* Alerts */
+    .alert{padding:12px 16px;border-radius:12px;font-size:13px;font-weight:500;margin-bottom:12px;display:none;}
+    .alert-success{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:var(--accent-green);}
+    .alert-error{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;}
+
+    /* Bottom nav */
+    .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(10,14,39,0.95);backdrop-filter:blur(20px);border-top:1px solid var(--glass-border);padding:12px 20px;display:flex;justify-content:space-around;z-index:100;border-radius:24px 24px 0 0;}
+    .nav-item{text-decoration:none;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:4px;transition:all 0.3s;padding:6px 12px;border-radius:12px;}
+    .nav-item.active{color:var(--accent-green);background:rgba(34,197,94,0.1);}
+    .nav-icon{font-size:20px;} .nav-label{font-size:10px;font-weight:600;}
+
+    .toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);background:rgba(34,197,94,0.95);backdrop-filter:blur(10px);color:white;padding:14px 24px;border-radius:12px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:all 0.3s;z-index:9999;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+    .spinner{border:3px solid rgba(255,255,255,0.1);border-top:3px solid var(--accent-green);border-radius:50%;width:36px;height:36px;animation:spin 1s linear infinite;margin:20px auto;}
+    @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div class="logo-section">
+        <div class="logo">R</div>
+        <div>
+          <div class="brand-name">Rizq Digital</div>
+          <div class="page-subtitle">My Profile</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <a href="dashboard.html" class="icon-btn"><i class="fas fa-arrow-left"></i></a>
+        <button class="icon-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-content">
+
+      <!-- Avatar -->
+      <div class="avatar-section">
+        <div class="avatar" id="avatarInitial">R</div>
+        <div class="avatar-name" id="profileName">Loading...</div>
+        <div class="avatar-email" id="profileEmail">—</div>
+        <div class="member-since" id="memberSince"></div>
+        <div class="level-badge" id="levelBadge">Starter</div>
+      </div>
+
+      <!-- Account info (read-only) -->
+      <div class="section">
+        <div class="section-title"><div class="title-icon">📊</div>Account Stats</div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-wallet"></i> Balance</span><span class="info-value" id="infoBalance">—</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-arrow-trend-up"></i> Total Invested</span><span class="info-value" id="infoInvested">—</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-coins"></i> Total Earned</span><span class="info-value" id="infoEarned">—</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-users"></i> Team Size</span><span class="info-value" id="infoTeam">—</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-gift"></i> Team Bonus</span><span class="info-value" id="infoBonus">—</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-share-nodes"></i> Referral Code</span><span class="info-value" id="infoRefCode" style="color:var(--accent-green);cursor:pointer;" onclick="copyRefCode()">—</span></div>
+      </div>
+
+      <!-- Edit profile -->
+      <div class="section">
+        <div class="section-title"><div class="title-icon">✏️</div>Edit Profile</div>
+        <div id="profileAlert" class="alert"></div>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="editName" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" id="editPhone" placeholder="03XXXXXXXXX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">JazzCash Number (for withdrawals)</label>
+          <input type="tel" class="form-input" id="editJazzCash" placeholder="03XXXXXXXXX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="editEmail" disabled>
+        </div>
+        <button class="save-btn" id="saveProfileBtn" onclick="saveProfile()">
+          <i class="fas fa-save"></i> Save Changes
+        </button>
+      </div>
+
+      <!-- Change password -->
+      <div class="section">
+        <div class="section-title"><div class="title-icon">🔒</div>Change Password</div>
+        <div id="pwAlert" class="alert"></div>
+        <div class="form-group">
+          <label class="form-label">New Password</label>
+          <div class="input-icon-wrap">
+            <input type="password" class="form-input" id="newPassword" placeholder="Min 6 characters">
+            <i class="fas fa-eye input-icon" onclick="togglePw('newPassword',this)"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm New Password</label>
+          <div class="input-icon-wrap">
+            <input type="password" class="form-input" id="confirmPassword" placeholder="Repeat password">
+            <i class="fas fa-eye input-icon" onclick="togglePw('confirmPassword',this)"></i>
+          </div>
+        </div>
+        <button class="save-btn" id="savePwBtn" onclick="changePassword()">
+          <i class="fas fa-lock"></i> Update Password
+        </button>
+      </div>
+
+      <!-- Logout -->
+      <div class="section" style="padding:16px 20px;">
+        <button class="danger-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item"><i class="nav-icon fas fa-home"></i><span class="nav-label">Dashboard</span></a>
+    <a href="plans.html" class="nav-item"><i class="nav-icon fas fa-layer-group"></i><span class="nav-label">Plans</span></a>
+    <a href="my-team.html" class="nav-item"><i class="nav-icon fas fa-users"></i><span class="nav-label">My Team</span></a>
+    <a href="withdraw.html" class="nav-item"><i class="nav-icon fas fa-wallet"></i><span class="nav-label">Withdraw</span></a>
+  </nav>
+
+  <div class="toast" id="toast"><span id="toastMessage"></span></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+    let currentUser = null;
+    let userData = null;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = "login.html"; return; }
+      currentUser = user;
+      await loadProfile();
+    });
+
+    async function loadProfile() {
+      const snap = await getDoc(doc(db, "users", currentUser.uid));
+      if (!snap.exists()) return;
+      userData = snap.data();
+      const u = userData;
+
+      const initial = (u.username || u.email || 'R').charAt(0).toUpperCase();
+      document.getElementById("avatarInitial").textContent = initial;
+      document.getElementById("profileName").textContent   = u.username || "—";
+      document.getElementById("profileEmail").textContent  = u.email || currentUser.email;
+      document.getElementById("memberSince").textContent   = "Member since " + formatDate(u.createdAt);
+
+      const levels = { 0:'Starter', 1:'Field A Unlocked', 2:'Field B', 3:'Field C', 4:'Platinum' };
+      document.getElementById("levelBadge").textContent = levels[u.packageLevel] || "Starter";
+
+      document.getElementById("infoBalance").textContent   = "Rs " + fmt(u.balance);
+      document.getElementById("infoInvested").textContent  = "Rs " + fmt(u.totalInvested);
+      document.getElementById("infoEarned").textContent    = "Rs " + fmt(u.totalEarned);
+      document.getElementById("infoTeam").textContent      = (u.totalTeam || 0) + " members";
+      document.getElementById("infoBonus").textContent     = "Rs " + fmt(u.teamBonus);
+      document.getElementById("infoRefCode").textContent   = u.referralCode || "—";
+
+      document.getElementById("editName").value     = u.username || "";
+      document.getElementById("editPhone").value    = u.phone || "";
+      document.getElementById("editJazzCash").value = u.jazzCashNumber || u.phone || "";
+      document.getElementById("editEmail").value    = u.email || currentUser.email;
+    }
+
+    window.saveProfile = async function() {
+      const btn  = document.getElementById("saveProfileBtn");
+      const name     = document.getElementById("editName").value.trim();
+      const phone    = document.getElementById("editPhone").value.trim();
+      const jazzCash = document.getElementById("editJazzCash").value.trim();
+
+      if (!name) { showAlert("profileAlert", "error", "Name cannot be empty."); return; }
+      if (phone && phone.length !== 11) { showAlert("profileAlert", "error", "Enter a valid 11-digit phone number."); return; }
+
+      btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+      try {
+        await updateDoc(doc(db, "users", currentUser.uid), {
+          username:       name,
+          phone:          phone || userData.phone,
+          jazzCashNumber: jazzCash || phone || userData.phone
+        });
+        showAlert("profileAlert", "success", "✅ Profile updated successfully!");
+        await loadProfile();
+      } catch (err) {
+        showAlert("profileAlert", "error", "Error: " + err.message);
+      }
+      btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+    };
+
+    window.changePassword = async function() {
+      const btn  = document.getElementById("savePwBtn");
+      const newPw  = document.getElementById("newPassword").value;
+      const confPw = document.getElementById("confirmPassword").value;
+
+      if (newPw.length < 6)  { showAlert("pwAlert","error","Password must be at least 6 characters."); return; }
+      if (newPw !== confPw)  { showAlert("pwAlert","error","Passwords do not match."); return; }
+
+      btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+      try {
+        await updatePassword(currentUser, newPw);
+        showAlert("pwAlert","success","✅ Password updated successfully!");
+        document.getElementById("newPassword").value = "";
+        document.getElementById("confirmPassword").value = "";
+      } catch (err) {
+        if (err.code === "auth/requires-recent-login") {
+          showAlert("pwAlert","error","For security, please logout and log back in before changing your password.");
+        } else {
+          showAlert("pwAlert","error","Error: " + err.message);
+        }
+      }
+      btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Update Password';
+    };
+
+    window.copyRefCode = function() {
+      const code = userData?.referralCode;
+      if (!code) return;
+      const link = `https://rizqdigital.org/register.html?ref=${code}`;
+      navigator.clipboard.writeText(link).then(() => showToast("Referral link copied!")).catch(() => showToast("Code: " + code));
+    };
+
+    window.togglePw = function(id, icon) {
+      const inp = document.getElementById(id);
+      if (inp.type === "password") { inp.type = "text"; icon.classList.replace("fa-eye","fa-eye-slash"); }
+      else { inp.type = "password"; icon.classList.replace("fa-eye-slash","fa-eye"); }
+    };
+
+    function showAlert(id, type, msg) {
+      const el = document.getElementById(id);
+      el.className = `alert alert-${type}`;
+      el.textContent = msg;
+      el.style.display = "block";
+      setTimeout(() => { el.style.display = "none"; }, 4000);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      document.getElementById("toastMessage").textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2500);
+    }
+
+    function fmt(n) { return Number(n||0).toLocaleString('en-PK',{maximumFractionDigits:0}); }
+    function formatDate(v) {
+      if (!v) return "N/A";
+      try { const d = v.toDate ? v.toDate() : new Date(v); return d.toLocaleDateString('en-PK',{month:'short',year:'numeric'}); }
+      catch { return "N/A"; }
+    }
+
+    window.logout = () => signOut(auth).then(() => window.location.href = "index.html");
+  </script>
+</body>
+</html>

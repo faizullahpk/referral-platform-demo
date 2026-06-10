@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Rizq Digital</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #d1fae5, #bbf7d0, #a7f3d0);
+      background-size: 400% 400%;
+      animation: bg 20s ease infinite;
+      min-height: 100vh;
+      color: #064e3b;
+    }
+
+    @keyframes bg {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 800;
+      color: #064e3b;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand i {
+      color: #22c55e;
+    }
+
+    .back-btn {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #064e3b;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn:hover {
+      background: rgba(34, 197, 94, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .hero-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 60px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: #6b7280;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(34, 197, 94, 0.2);
+    }
+
+    .card-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      color: #064e3b;
+      margin-bottom: 16px;
+    }
+
+    .card p {
+      line-height: 1.8;
+      color: #374151;
+    }
+
+    .values-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 50px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      margin-bottom: 40px;
+    }
+
+    .values-section h2 {
+      font-size: 36px;
+      color: #064e3b;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .value-item {
+      text-align: center;
+      padding: 30px;
+      background: rgba(34, 197, 94, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .value-item i {
+      font-size: 48px;
+      color: #22c55e;
+      margin-bottom: 16px;
+    }
+
+    .value-item h3 {
+      font-size: 20px;
+      color: #064e3b;
+      margin-bottom: 12px;
+    }
+
+    .value-item p {
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    .stats-section {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border-radius: 24px;
+      padding: 50px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .stat-item h3 {
+      font-size: 42px;
+      font-weight: 800;
+      color: #22c55e;
+      margin-bottom: 8px;
+    }
+
+    .stat-item p {
+      font-size: 16px;
+      color: #047857;
+      font-weight: 600;
+    }
+
+    .cta-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 50px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .cta-section h2 {
+      font-size: 32px;
+      color: #064e3b;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 18px;
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 18px;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s;
+      text-decoration: none;
+      z-index: 1000;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 40px 30px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 30px 20px;
+      }
+
+      .values-section {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-content">
+      <a href="index.html" class="brand">
+        <i class="fas fa-gem"></i> Rizq Digital
+      </a>
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <h1><i class="fas fa-building"></i> About Rizq Digital</h1>
+      <p class="subtitle">
+        Rizq Digital is Pakistan's premier investment platform, dedicated to empowering individuals with smart, secure, and high-return investment opportunities. We believe everyone deserves access to financial growth and prosperity.
+      </p>
+    </div>
+
+    <!-- Mission & Vision Cards -->
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h2>Our Mission</h2>
+        <p>
+          To democratize wealth creation by providing accessible, transparent, and profitable investment opportunities to every Pakistani. We strive to make financial growth achievable for everyone, regardless of their starting capital.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <h2>Our Vision</h2>
+        <p>
+          To become Pakistan's most trusted digital investment platform, known for transparency, reliability, and consistent returns. We envision a future where financial freedom is within reach for all our users.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <h2>Why Choose Us</h2>
+        <p>
+          We offer competitive returns, transparent operations, instant withdrawals, and a proven track record. Our platform is designed with user experience in mind, making investing simple and stress-free for everyone.
+        </p>
+      </div>
+    </div>
+
+    <!-- Core Values -->
+    <div class="values-section">
+      <h2><i class="fas fa-heart"></i> Our Core Values</h2>
+      <div class="values-grid">
+        <div class="value-item">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Security First</h3>
+          <p>Your funds and data are protected with bank-level security measures.</p>
+        </div>
+
+        <div class="value-item">
+          <i class="fas fa-handshake"></i>
+          <h3>Transparency</h3>
+          <p>Clear terms, no hidden fees, and honest communication always.</p>
+        </div>
+
+        <div class="value-item">
+          <i class="fas fa-chart-line"></i>
+          <h3>Consistent Returns</h3>
+          <p>Reliable daily and monthly profits backed by real investments.</p>
+        </div>
+
+        <div class="value-item">
+          <i class="fas fa-users"></i>
+          <h3>Community First</h3>
+          <p>We grow together through our rewarding referral program.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Platform Statistics -->
+    <div class="stats-section">
+      <h2 style="color: #064e3b; font-size: 36px; margin-bottom: 10px;">Our Growing Community</h2>
+      <p style="color: #047857; font-size: 16px; margin-bottom: 20px;">Join thousands of satisfied investors</p>
+      
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>700+</h3>
+          <p>Active Investors</p>
+        </div>
+
+        <div class="stat-item">
+          <h3>Rs 15M+</h3>
+          <p>Total Invested</p>
+        </div>
+
+        <div class="stat-item">
+          <h3>Rs 9M+</h3>
+          <p>Withdrawn by Users</p>
+        </div>
+
+        <div class="stat-item">
+          <h3>99%</h3>
+          <p>Satisfaction Rate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- What We Offer -->
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-coins"></i>
+        </div>
+        <h2>Flexible Plans</h2>
+        <p>
+          Choose from daily starter packages (as low as Rs 500) to premium monthly plans (up to Rs 55,000). We have investment options for every budget and goal.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-percentage"></i>
+        </div>
+        <h2>Referral Rewards</h2>
+        <p>
+          Earn 2% commission on every deposit made by users you refer. Build your passive income stream by growing our community together.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h2>Easy Withdrawals</h2>
+        <p>
+          Withdraw your earnings anytime via JazzCash. Our admin team processes withdrawal requests within 2-24 hours for your convenience.
+        </p>
+      </div>
+    </div>
+
+    <!-- Location & Contact -->
+    <div class="values-section">
+      <h2><i class="fas fa-map-marker-alt"></i> Where We Operate</h2>
+      <div style="text-align: center; padding: 20px;">
+        <p style="font-size: 18px; color: #374151; line-height: 1.8;">
+          <strong style="color: #064e3b;">Rizq Digital</strong><br>
+          Islamabad, Pakistan<br><br>
+          <i class="fab fa-whatsapp" style="color: #25D366;"></i> 
+          <a href="https://whatsapp.com/channel/0029Vb7DhcI1iUxba0cn4A0S" target="_blank" style="color: #22c55e; font-weight: 600; text-decoration: none;">
+            Join our WhatsApp Channel
+          </a>
+          <br><br>
+          We serve investors across Pakistan with dedication and excellence.
+        </p>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta-section">
+      <h2>Ready to Start Your Investment Journey?</h2>
+      <p>Join thousands of satisfied investors and start earning today!</p>
+      <a href="register.html" class="cta-button">
+        <i class="fas fa-user-plus"></i> Create Your Account Now
+      </a>
+      <br><br>
+      <a href="login.html" style="color: #22c55e; font-weight: 600; text-decoration: none;">
+        Already have an account? Login here →
+      </a>
+    </div>
+
+  </div>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://whatsapp.com/channel/0029Vb7DhcI1iUxba0cn4A0S" class="whatsapp-float" target="_blank" aria-label="WhatsApp Channel">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+</body>
+</html>

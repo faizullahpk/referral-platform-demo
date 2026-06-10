@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fix Existing Users - Admin Only</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', Arial, sans-serif; }
+    body { padding: 40px; background: #1a1f3a; color: white; min-height: 100vh; }
+    .container { max-width: 600px; margin: 0 auto; background: rgba(0,0,0,0.5); padding: 30px; border-radius: 12px; border: 1px solid rgba(34,197,94,0.3); }
+    h1 { margin-bottom: 16px; font-size: 22px; }
+    p  { color: #94a3b8; margin-bottom: 12px; font-size: 14px; line-height: 1.6; }
+    .warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4); color: #fbbf24; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; }
+    /* Auth gate */
+    .auth-gate { margin-bottom: 24px; }
+    .auth-gate input { width: 100%; padding: 12px 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px; color: white; font-size: 15px; outline: none; margin-bottom: 10px; }
+    .auth-gate input:focus { border-color: #22c55e; }
+    .auth-error { color: #fca5a5; font-size: 13px; display: none; margin-bottom: 10px; }
+    button { background: #22c55e; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; transition: 0.3s; }
+    button:hover { background: #16a34a; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    #mainContent { display: none; }
+    #output { margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.08); border-radius: 8px; white-space: pre-wrap; font-size: 13px; color: #86efac; line-height: 1.6; min-height: 60px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🔧 Fix Existing Users</h1>
+  <p>Adds missing balance fields to all users in the database.</p>
+
+  <div class="warning">
+    ⚠️ <strong>Run this ONCE only!</strong> Delete this file after use.
+  </div>
+
+  <!-- ✅ FIX: Password gate before any action -->
+  <div id="authGate" class="auth-gate">
+    <p><strong>Enter admin secret to proceed:</strong></p>
+    <input type="password" id="secretInput" placeholder="Admin secret key" onkeydown="if(event.key==='Enter')checkSecret()">
+    <div id="authError" class="auth-error"><i>❌ Incorrect secret. Access denied.</i></div>
+    <button onclick="checkSecret()">🔐 Unlock</button>
+  </div>
+
+  <div id="mainContent">
+    <button id="fixBtn" onclick="fixAllUsers()">⚙️ Fix All Users Now</button>
+    <div id="output">Waiting...</div>
+  </div>
+</div>
+
+<script>
+  // ✅ Simple client-side secret gate — change this secret
+  const ADMIN_SECRET = "rizq_fix_2026";
+
+  window.checkSecret = function() {
+    const val = document.getElementById('secretInput').value;
+    if (val === ADMIN_SECRET) {
+      document.getElementById('authGate').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    } else {
+      document.getElementById('authError').style.display = 'block';
+      setTimeout(() => document.getElementById('authError').style.display = 'none', 3000);
+    }
+  };
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  window.fixAllUsers = async function() {
+    const output = document.getElementById('output');
+    const btn    = document.getElementById('fixBtn');
+    btn.disabled = true;
+    output.textContent = "Processing...\n";
+
+    try {
+      const snap = await getDocs(collection(db, "users"));
+      output.textContent += `Found ${snap.size} users\n\n`;
+
+      let fixed = 0, skipped = 0;
+
+      for (const userDoc of snap.docs) {
+        const ud  = userDoc.data();
+        const uid = userDoc.id;
+
+        if (ud.balance === undefined || ud.totalInvested === undefined || ud.packageLevel === undefined) {
+          output.textContent += `Fixing: ${ud.email || uid}\n`;
+          await updateDoc(doc(db, "users", uid), {
+            balance:        ud.balance        ?? 0,
+            totalInvested:  ud.totalInvested  ?? 0,
+            totalEarned:    ud.totalEarned    ?? 0,
+            totalWithdrawn: ud.totalWithdrawn ?? 0,
+            dailyProfit:    ud.dailyProfit    ?? 0,
+            totalTeam:      ud.totalTeam      ?? 0,
+            activeTeam:     ud.activeTeam     ?? 0,
+            teamBonus:      ud.teamBonus      ?? 0,
+            packageLevel:   ud.packageLevel   ?? 0,
+            currentPackage: ud.currentPackage ?? "none",
+          });
+          fixed++;
+        } else {
+          skipped++;
+        }
+      }
+
+      output.textContent += `\n✅ DONE!\n`;
+      output.textContent += `Fixed:    ${fixed}\n`;
+      output.textContent += `Skipped:  ${skipped}\n`;
+      output.textContent += `\n⚠️ Please delete this file from your server now.`;
+      btn.textContent = "✅ Done — Delete this file!";
+
+    } catch (err) {
+      output.textContent += `\n❌ ERROR: ${err.message}`;
+      btn.disabled = false;
+    }
+  };
+</script>
+
+</body>
+</html>

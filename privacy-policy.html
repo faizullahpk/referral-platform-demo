@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Rizq Digital</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #d1fae5, #bbf7d0, #a7f3d0);
+      background-size: 400% 400%;
+      animation: bg 20s ease infinite;
+      min-height: 100vh;
+      color: #064e3b;
+    }
+
+    @keyframes bg {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Header */
+    .header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 800;
+      color: #064e3b;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand i {
+      color: #22c55e;
+    }
+
+    .back-btn {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #064e3b;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn:hover {
+      background: rgba(34, 197, 94, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Content Container */
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .content-box {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 50px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .last-updated {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #064e3b;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h2 i {
+      color: #22c55e;
+    }
+
+    p {
+      line-height: 1.8;
+      color: #374151;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      margin-left: 24px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      line-height: 1.8;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    .highlight-box {
+      background: rgba(34, 197, 94, 0.1);
+      border-left: 4px solid #22c55e;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: #064e3b;
+    }
+
+    .contact-section {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .contact-section h3 {
+      color: #064e3b;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .contact-section p {
+      color: #047857;
+      margin-bottom: 0;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s;
+      text-decoration: none;
+      z-index: 1000;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 15px 20px;
+      }
+
+      .content-box {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <a href="index.html" class="brand">
+        <i class="fas fa-gem"></i> Rizq Digital
+      </a>
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="content-box">
+      <h1><i class="fas fa-shield-alt"></i> Privacy Policy</h1>
+      <p class="last-updated">Last Updated: February 10, 2026</p>
+
+      <p>
+        At <strong>Rizq Digital</strong>, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our investment platform.
+      </p>
+
+      <div class="highlight-box">
+        <p><strong><i class="fas fa-info-circle"></i> Important:</strong> By using Rizq Digital's services, you agree to the collection and use of information in accordance with this policy.</p>
+      </div>
+
+      <h2><i class="fas fa-database"></i> Information We Collect</h2>
+      <p>We collect information that you provide directly to us when you:</p>
+      <ul>
+        <li>Create an account and register on our platform</li>
+        <li>Make investment deposits or withdrawal requests</li>
+        <li>Contact our customer support team</li>
+        <li>Participate in our referral program</li>
+      </ul>
+      
+      <p><strong>Personal Information includes:</strong></p>
+      <ul>
+        <li>Full name and email address</li>
+        <li>Phone number and CNIC (for KYC verification)</li>
+        <li>JazzCash account details (for transactions)</li>
+        <li>Investment history and transaction records</li>
+        <li>IP address and device information (for security)</li>
+      </ul>
+
+      <h2><i class="fas fa-cogs"></i> How We Use Your Information</h2>
+      <p>We use the collected information for the following purposes:</p>
+      <ul>
+        <li><strong>Account Management:</strong> To create and maintain your investment account</li>
+        <li><strong>Transaction Processing:</strong> To process deposits, withdrawals, and referral commissions</li>
+        <li><strong>Security:</strong> To detect and prevent fraudulent activities and duplicate accounts</li>
+        <li><strong>Communication:</strong> To send important updates about your investments and account</li>
+        <li><strong>Customer Support:</strong> To respond to your inquiries and provide assistance</li>
+        <li><strong>Legal Compliance:</strong> To comply with applicable laws and regulations</li>
+      </ul>
+
+      <h2><i class="fas fa-users"></i> Referral Program</h2>
+      <p>
+        Our referral program allows you to earn 2% commission on deposits made by users you refer. When you refer someone:
+      </p>
+      <ul>
+        <li>Your referral code is linked to the new user's account</li>
+        <li>You earn 2% of their total deposits as commission</li>
+        <li>Commission is automatically credited to your balance</li>
+        <li>Referral data is tracked for transparency and accountability</li>
+      </ul>
+
+      <h2><i class="fas fa-lock"></i> Data Security</h2>
+      <p>
+        We implement industry-standard security measures to protect your personal information:
+      </p>
+      <ul>
+        <li>Firebase Authentication for secure login</li>
+        <li>Encrypted data transmission (SSL/TLS)</li>
+        <li>Secure cloud storage with Google Cloud Firestore</li>
+        <li>IP tracking to prevent unauthorized access</li>
+        <li>Regular security audits and monitoring</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong><i class="fas fa-exclamation-triangle"></i> Note:</strong> While we take all reasonable measures to protect your data, no method of transmission over the internet is 100% secure. We cannot guarantee absolute security.</p>
+      </div>
+
+      <h2><i class="fas fa-share-alt"></i> Information Sharing</h2>
+      <p>
+        We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:
+      </p>
+      <ul>
+        <li><strong>Legal Requirements:</strong> When required by law or to comply with legal processes</li>
+        <li><strong>Payment Processing:</strong> With JazzCash for transaction processing</li>
+        <li><strong>Fraud Prevention:</strong> To investigate suspected fraudulent activities</li>
+        <li><strong>Business Transfers:</strong> In case of merger, acquisition, or sale of assets</li>
+      </ul>
+
+      <h2><i class="fas fa-user-check"></i> Your Rights</h2>
+      <p>You have the following rights regarding your personal information:</p>
+      <ul>
+        <li><strong>Access:</strong> Request a copy of your personal data</li>
+        <li><strong>Correction:</strong> Update or correct inaccurate information</li>
+        <li><strong>Deletion:</strong> Request deletion of your account and data</li>
+        <li><strong>Withdrawal:</strong> Withdraw consent for data processing</li>
+        <li><strong>Data Portability:</strong> Receive your data in a structured format</li>
+      </ul>
+
+      <h2><i class="fas fa-cookie-bite"></i> Cookies and Tracking</h2>
+      <p>
+        We use browser storage (localStorage) to enhance your experience by:
+      </p>
+      <ul>
+        <li>Remembering your login session</li>
+        <li>Storing theme preferences (dark/light mode)</li>
+        <li>Tracking platform statistics (for display purposes only)</li>
+        <li>Generating device fingerprints for security</li>
+      </ul>
+
+      <h2><i class="fas fa-child"></i> Children's Privacy</h2>
+      <p>
+        Our services are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you are under 18, please do not use our platform.
+      </p>
+
+      <h2><i class="fas fa-edit"></i> Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically.
+      </p>
+
+      <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+      <div class="contact-section">
+        <h3>Have Questions About Your Privacy?</h3>
+        <p>
+          <i class="fas fa-building"></i> <strong>Rizq Digital</strong><br>
+          Islamabad, Pakistan<br><br>
+          <i class="fab fa-whatsapp"></i> WhatsApp Channel: 
+          <a href="https://whatsapp.com/channel/0029Vb7DhcI1iUxba0cn4A0S" target="_blank" style="color: #047857; font-weight: 600;">Join Now</a><br><br>
+          <i class="fas fa-envelope"></i> Email: support@rizqdigital.com
+        </p>
+      </div>
+
+      <div class="highlight-box" style="margin-top: 40px;">
+        <p><strong><i class="fas fa-handshake"></i> Your Trust Matters:</strong> We are committed to maintaining the trust you place in us. Your privacy and data security are our top priorities.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://whatsapp.com/channel/0029Vb7DhcI1iUxba0cn4A0S" class="whatsapp-float" target="_blank" aria-label="WhatsApp Channel">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+</body>
+</html>

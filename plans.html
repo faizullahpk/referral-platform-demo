@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment Plans - Rizq Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-primary: #0a0e27;
+      --bg-secondary: #141a3a;
+      --accent-green: #22c55e;
+      --accent-cyan: #06b6d4;
+      --accent-gold: #f59e0b;
+      --text-primary: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1729 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 100px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 20% 30%, rgba(34,197,94,0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(6,182,212,0.08) 0%, transparent 50%);
+      animation: gradientShift 15s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientShift { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+
+    .header {
+      background: rgba(10, 14, 39, 0.9);
+      backdrop-filter: blur(20px);
+      padding: 16px 20px;
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+
+    .logo-section { display: flex; align-items: center; gap: 12px; }
+
+    .logo {
+      width: 45px; height: 45px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: white;
+    }
+
+    .brand-name { font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #22c55e, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .back-btn {
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      padding: 10px 20px; border-radius: 12px; color: var(--text-primary);
+      text-decoration: none; font-weight: 600; transition: all 0.3s;
+    }
+
+    .back-btn:hover { background: rgba(34,197,94,0.1); border-color: var(--accent-green); }
+
+    .hero { text-align: center; padding: 60px 20px 40px; max-width: 900px; margin: 0 auto; }
+
+    .hero h1 {
+      font-size: 48px; font-weight: 800; margin-bottom: 16px;
+      background: linear-gradient(135deg, #22c55e, #06b6d4, #8b5cf6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero p { font-size: 18px; color: var(--text-muted); margin-bottom: 30px; }
+
+    .notice-box {
+      background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(6,182,212,0.1));
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 16px; padding: 24px;
+      max-width: 800px; margin: 0 auto 40px;
+    }
+
+    .notice-box h3 { color: var(--accent-green); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .notice-box ul { list-style: none; padding: 0; }
+    .notice-box li { padding: 8px 0 8px 28px; position: relative; color: var(--text-muted); }
+    .notice-box li:before { content: "✓"; position: absolute; left: 0; color: var(--accent-green); font-weight: bold; }
+
+    .field-tabs { display: flex; justify-content: center; gap: 15px; margin: 40px 20px 30px; flex-wrap: wrap; }
+
+    .field-tab {
+      background: var(--glass-bg); border: 2px solid var(--glass-border);
+      padding: 12px 30px; border-radius: 12px; cursor: pointer;
+      font-weight: 600; transition: all 0.3s; color: var(--text-muted);
+    }
+
+    .field-tab.active {
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      border-color: var(--accent-green); color: white;
+      transform: translateY(-2px); box-shadow: 0 8px 20px rgba(34,197,94,0.3);
+    }
+
+    .field-tab:hover:not(.active) { border-color: var(--accent-green); color: var(--accent-green); }
+
+    .plans-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    .field-section { display: none; }
+    .field-section.active { display: block; }
+
+    .section-header { text-align: center; margin-bottom: 30px; }
+    .section-header h2 { font-size: 32px; color: var(--accent-green); margin-bottom: 8px; }
+    .section-header p { color: var(--text-muted); }
+
+    .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px; }
+
+    .plan-card {
+      background: rgba(20, 26, 58, 0.8);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px; padding: 30px;
+      position: relative; overflow: hidden; transition: all 0.3s;
+    }
+
+    .plan-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(34,197,94,0.2); border-color: var(--accent-green); }
+
+    .plan-card.starter { border: 2px solid var(--accent-gold); background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(20,26,58,0.8)); }
+    .plan-card.popular { border: 2px solid var(--accent-green); background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(20,26,58,0.8)); }
+
+    .badge {
+      position: absolute; top: 15px; right: 15px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    }
+
+    .badge.required { background: linear-gradient(135deg, #f59e0b, #f97316); }
+
+    .plan-header { text-align: center; margin-bottom: 24px; }
+    .plan-name { font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .plan-type { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    .plan-price { text-align: center; margin: 24px 0; }
+    .amount { font-size: 42px; font-weight: 800; color: var(--accent-green); }
+    .currency { font-size: 20px; vertical-align: top; }
+
+    .plan-details { margin: 24px 0; }
+
+    .detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--glass-border); }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label { color: var(--text-muted); font-size: 14px; }
+    .detail-value { color: var(--text-primary); font-weight: 600; font-size: 15px; }
+    .detail-value.profit { color: var(--accent-green); }
+
+    .plan-footer { margin-top: 24px; }
+
+    .buy-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      color: white; border: none; padding: 14px; border-radius: 12px;
+      font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s;
+    }
+
+    .buy-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(34,197,94,0.4); }
+    .buy-btn:disabled { opacity: 0.5; cursor: not-allowed; background: #475569; }
+
+    .lock-message { text-align: center; color: #f59e0b; font-size: 13px; margin-top: 10px; display: none; align-items: center; justify-content: center; gap: 6px; }
+
+    .withdrawal-info { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 12px; margin-top: 16px; text-align: center; }
+    .withdrawal-info p { font-size: 13px; color: #fbbf24; margin: 0; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 36px; }
+      .plans-grid { grid-template-columns: 1fr; }
+      .field-tabs { gap: 10px; }
+      .field-tab { padding: 10px 20px; font-size: 14px; }
+    }
+
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(10, 14, 39, 0.95); backdrop-filter: blur(20px);
+      border-top: 1px solid var(--glass-border);
+      padding: 12px 20px; display: flex; justify-content: space-around; z-index: 99;
+    }
+
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); text-decoration: none; font-size: 12px; transition: all 0.3s; }
+    .nav-item i { font-size: 20px; }
+    .nav-item.active, .nav-item:hover { color: var(--accent-green); }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo"><i class="fas fa-gem"></i></div>
+        <div class="brand-name">Rizq Digital</div>
+      </div>
+      <a href="dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Investment Plans</h1>
+    <p>Choose the perfect package to grow your wealth</p>
+  </section>
+
+  <div class="notice-box">
+    <h3><i class="fas fa-info-circle"></i> Getting Started</h3>
+    <ul>
+      <li><strong>All new users must start with Daily Starter Package (Rs 500)</strong></li>
+      <li>After Starter approval, Field A, B, C packages unlock automatically</li>
+      <li>Withdrawals available only at package end (except Daily Starter)</li>
+      <li>Referral bonuses paid when your team invests (2%)</li>
+    </ul>
+  </div>
+
+  <div class="field-tabs">
+    <button class="field-tab active" data-field="starter"><i class="fas fa-star"></i> Starter</button>
+    <button class="field-tab" data-field="fieldA"><i class="fas fa-calendar-week"></i> Field A - Weekly</button>
+    <button class="field-tab" data-field="fieldB"><i class="fas fa-calendar-alt"></i> Field B - 15 Days</button>
+    <button class="field-tab" data-field="fieldC"><i class="fas fa-calendar"></i> Field C - Monthly</button>
+  </div>
+
+  <div class="plans-container">
+
+    <!-- STARTER -->
+    <div id="starter" class="field-section active">
+      <div class="section-header">
+        <h2>Daily Starter Package</h2>
+        <p>Required for all new users • Daily withdrawals allowed</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card starter">
+          <span class="badge required">REQUIRED</span>
+          <div class="plan-header">
+            <h3 class="plan-name">Daily Starter</h3>
+            <p class="plan-type">15 Days • Daily Profit</p>
+          </div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 500</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Daily Profit</span><span class="detail-value profit">Rs 50</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">15 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 750</span></div>
+            <div class="detail-row"><span class="detail-label">Withdrawal</span><span class="detail-value">Daily ✅</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('STARTER', 500)"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-info-circle"></i> Withdraw anytime after daily profit credit</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIELD A - WEEKLY -->
+    <div id="fieldA" class="field-section">
+      <div class="section-header">
+        <h2>Field A - Weekly Packages</h2>
+        <p>7-day investment plans • Withdrawal at end only</p>
+      </div>
+      <div class="plans-grid">
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">Weekly Bronze</h3><p class="plan-type">Level 1 • 7 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 1,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Weekly Profit</span><span class="detail-value profit">Rs 150</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">7 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 1,150</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">15%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('A1', 1000)" id="btnA1"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockA1"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 7 only</p></div>
+        </div>
+
+        <div class="plan-card popular">
+          <span class="badge">POPULAR</span>
+          <div class="plan-header"><h3 class="plan-name">Weekly Silver</h3><p class="plan-type">Level 1 • 7 Days</p></div>
+          <!-- ✅ FIX: Unified price Rs 3,000 -->
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 3,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Weekly Profit</span><span class="detail-value profit">Rs 500</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">7 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 3,500</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">16.7%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('A2', 3000)" id="btnA2"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockA2"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 7 only</p></div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">Weekly Gold</h3><p class="plan-type">Level 1 • 7 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 5,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Weekly Profit</span><span class="detail-value profit">Rs 900</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">7 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 5,900</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">18%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('A3', 5000)" id="btnA3"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockA3"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 7 only</p></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FIELD B - 15 DAYS -->
+    <div id="fieldB" class="field-section">
+      <div class="section-header">
+        <h2>Field B - 15 Days Packages</h2>
+        <p>15-day investment plans • Withdrawal at end only</p>
+      </div>
+      <div class="plans-grid">
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">15-Day Starter</h3><p class="plan-type">Level 2 • 15 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 3,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 600</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">15 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 3,600</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">20%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('B1', 3000)" id="btnB1"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockB1"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 15 only</p></div>
+        </div>
+
+        <div class="plan-card popular">
+          <span class="badge">POPULAR</span>
+          <div class="plan-header"><h3 class="plan-name">15-Day Plus</h3><p class="plan-type">Level 2 • 15 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 5,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 1,200</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">15 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 6,200</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">24%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('B2', 5000)" id="btnB2"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockB2"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 15 only</p></div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">15-Day Premium</h3><p class="plan-type">Level 2 • 15 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 10,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 2,500</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">15 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 12,500</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">25%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('B3', 10000)" id="btnB3"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockB3"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 15 only</p></div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">15-Day Elite</h3><p class="plan-type">Level 2 • 15 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 20,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 5,500</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">15 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 25,500</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">27.5%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('B4', 20000)" id="btnB4"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockB4"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 15 only</p></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FIELD C - MONTHLY -->
+    <div id="fieldC" class="field-section">
+      <div class="section-header">
+        <h2>Field C - Monthly Packages</h2>
+        <p>30-day investment plans • Withdrawal at end only</p>
+      </div>
+      <div class="plans-grid">
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">Monthly Basic</h3><p class="plan-type">Level 3 • 30 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 5,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 1,500</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">30 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 6,500</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">30%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('C1', 5000)" id="btnC1"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockC1"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 30 only</p></div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">Monthly Standard</h3><p class="plan-type">Level 3 • 30 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 10,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 3,500</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">30 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 13,500</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">35%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('C2', 10000)" id="btnC2"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockC2"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 30 only</p></div>
+        </div>
+
+        <div class="plan-card popular">
+          <span class="badge">POPULAR</span>
+          <div class="plan-header"><h3 class="plan-name">Monthly Advanced</h3><p class="plan-type">Level 3 • 30 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 15,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 5,500</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">30 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 20,500</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">36.7%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('C3', 15000)" id="btnC3"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockC3"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 30 only</p></div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">Monthly Pro</h3><p class="plan-type">Level 3 • 30 Days</p></div>
+          <!-- ✅ FIX: Unified price Rs 19,500 -->
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 19,500</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 7,500</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">30 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 27,000</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">38.5%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('C4', 19500)" id="btnC4"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockC4"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 30 only</p></div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">Monthly Premium</h3><p class="plan-type">Level 4 • 30 Days</p></div>
+          <!-- ✅ FIX: Unified price Rs 25,500 -->
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 25,500</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 10,000</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">30 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 35,500</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">39.2%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('C5', 25500)" id="btnC5"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockC5"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 30 only</p></div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">Monthly Platinum</h3><p class="plan-type">Level 4 • 30 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 30,500</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 13,000</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">30 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 43,500</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">42.6%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('C6', 30500)" id="btnC6"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockC6"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 30 only</p></div>
+        </div>
+
+        <div class="plan-card popular">
+          <span class="badge">BEST VALUE</span>
+          <div class="plan-header"><h3 class="plan-name">Monthly Diamond</h3><p class="plan-type">Level 4 • 30 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 45,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 20,000</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">30 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 65,000</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">44.4%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('C7', 45000)" id="btnC7"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockC7"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 30 only</p></div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-header"><h3 class="plan-name">Monthly Elite</h3><p class="plan-type">Level 4 • 30 Days</p></div>
+          <div class="plan-price"><span class="amount"><span class="currency">Rs</span> 55,000</span></div>
+          <div class="plan-details">
+            <div class="detail-row"><span class="detail-label">Total Profit</span><span class="detail-value profit">Rs 27,000</span></div>
+            <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">30 Days</span></div>
+            <div class="detail-row"><span class="detail-label">Total Return</span><span class="detail-value profit">Rs 82,000</span></div>
+            <div class="detail-row"><span class="detail-label">ROI</span><span class="detail-value">49.1%</span></div>
+          </div>
+          <div class="plan-footer">
+            <button class="buy-btn" onclick="purchasePackage('C8', 55000)" id="btnC8"><i class="fas fa-shopping-cart"></i> Purchase Now</button>
+            <div class="lock-message" id="lockC8"><i class="fas fa-lock"></i> Complete Starter Package First</div>
+          </div>
+          <div class="withdrawal-info"><p><i class="fas fa-calendar-check"></i> Withdrawal on Day 30 only</p></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="plans.html" class="nav-item active"><i class="fas fa-th-large"></i><span>Plans</span></a>
+    <a href="withdraw.html" class="nav-item"><i class="fas fa-wallet"></i><span>Wallet</span></a>
+    <a href="payment.html" class="nav-item"><i class="fas fa-credit-card"></i><span>Payment</span></a>
+  </nav>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+
+    let currentUser = null;
+    let userData    = null;
+
+    // Tab Switching
+    document.querySelectorAll('.field-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const field = tab.dataset.field;
+        document.querySelectorAll('.field-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.field-section').forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(field).classList.add('active');
+      });
+    });
+
+    // Handle hash on load (e.g. plans.html#plans → show fieldC)
+    if (window.location.hash === '#plans') {
+      document.querySelector('[data-field="fieldC"]').click();
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = "login.html"; return; }
+      currentUser = user;
+      try {
+        const userSnap = await getDoc(doc(db, "users", user.uid));
+        if (userSnap.exists()) {
+          userData = userSnap.data();
+          updatePackageAvailability();
+        }
+      } catch (err) { console.error(err); }
+    });
+
+    function updatePackageAvailability() {
+      if (!userData) return;
+      const level = userData.packageLevel || 0;
+
+      const lockIfNeeded = (pkgId, requiredLevel) => {
+        const btn  = document.getElementById(`btn${pkgId}`);
+        const lock = document.getElementById(`lock${pkgId}`);
+        if (!btn || !lock) return;
+        if (level < requiredLevel) {
+          btn.disabled = true;
+          btn.style.display = 'none';
+          lock.style.display = 'flex';
+        } else {
+          btn.disabled = false;
+          btn.style.display = 'block';
+          lock.style.display = 'none';
+        }
+      };
+
+      // All Field A/B/C require at least packageLevel 1 (starter complete)
+      ['A1','A2','A3','B1','B2','B3','B4','C1','C2','C3','C4'].forEach(id => lockIfNeeded(id, 1));
+      // Higher C plans require level 2
+      ['C5','C6','C7','C8'].forEach(id => lockIfNeeded(id, 2));
+    }
+
+    // ✅ FIX: Use URL params instead of sessionStorage for plan selection
+    window.purchasePackage = function(packageId, amount) {
+      if (!currentUser) { window.location.href = "login.html"; return; }
+      if (!userData)    { alert("User data not loaded. Please refresh."); return; }
+
+      if (packageId !== 'STARTER' && (userData.packageLevel || 0) === 0) {
+        alert("⚠️ You must complete the Daily Starter Package first!\nThis is required for all new users.");
+        document.querySelector('[data-field="starter"]').click();
+        return;
+      }
+
+      // ✅ FIX: Pass plan & amount as URL params (payment.html already reads these)
+      window.location.href = `payment.html?plan=${packageId}&amount=${amount}`;
+    };
+  </script>
+
+</body>
+</html>

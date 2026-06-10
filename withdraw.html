@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal - Rizq Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0e27, #1a1f3a);
+            min-height: 100vh; padding: 20px; color: #e5e7eb;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
+        .header h1 {
+            font-size: 28px;
+            background: linear-gradient(135deg, #22c55e, #06b6d4);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .header p { color: #94a3b8; font-size: 14px; }
+        .balance-card {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 20px; padding: 30px; margin-bottom: 25px;
+            text-align: center; box-shadow: 0 10px 30px rgba(34,197,94,0.3);
+        }
+        .balance-label { color: rgba(255,255,255,0.9); font-size: 14px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .balance-amount { font-size: 48px; font-weight: 800; color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .withdrawal-form {
+            background: rgba(15,23,42,0.95);
+            border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 20px; padding: 30px; margin-bottom: 25px;
+        }
+        .form-title { font-size: 20px; color: #22c55e; margin-bottom: 20px; font-weight: 700; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: #e5e7eb; font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .form-group input {
+            width: 100%; padding: 14px 16px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(34,197,94,0.3);
+            border-radius: 12px; color: #e5e7eb; font-size: 16px;
+            outline: none; transition: all 0.3s;
+        }
+        .form-group input:focus { border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.1); }
+        .form-group input::placeholder { color: #6b7280; }
+        .min-withdrawal {
+            background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3);
+            padding: 12px; border-radius: 10px; font-size: 13px; color: #fbbf24; margin-bottom: 20px;
+        }
+        .info-box {
+            background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3);
+            border-radius: 12px; padding: 16px; margin-bottom: 20px;
+        }
+        .info-box h4 { color: #06b6d4; font-size: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .info-box ul { list-style: none; padding-left: 0; }
+        .info-box li { color: #94a3b8; font-size: 13px; padding: 6px 0 6px 20px; position: relative; }
+        .info-box li:before { content: "✓"; position: absolute; left: 0; color: #06b6d4; font-weight: bold; }
+        .submit-btn {
+            width: 100%; background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white; padding: 16px; border: none; border-radius: 12px;
+            font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(34,197,94,0.3);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .submit-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(34,197,94,0.4); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .pending-withdrawals {
+            background: rgba(15,23,42,0.95);
+            border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 20px; padding: 30px; margin-bottom: 25px;
+        }
+        .pending-title { font-size: 18px; color: #22c55e; margin-bottom: 20px; font-weight: 700; }
+        .withdrawal-item {
+            background: rgba(0,0,0,0.3); border: 1px solid rgba(251,191,36,0.3);
+            border-radius: 12px; padding: 16px; margin-bottom: 12px;
+        }
+        .withdrawal-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .withdrawal-amount { font-size: 20px; font-weight: 700; color: #22c55e; }
+        .status-badge { padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .status-pending  { background: rgba(251,191,36,0.2); color: #fbbf24; border: 1px solid rgba(251,191,36,0.4); }
+        .status-approved { background: rgba(34,197,94,0.2);  color: #22c55e;  border: 1px solid rgba(34,197,94,0.4); }
+        .status-rejected { background: rgba(239,68,68,0.2);  color: #ef4444;  border: 1px solid rgba(239,68,68,0.4); }
+        .withdrawal-details { font-size: 13px; color: #94a3b8; }
+        .withdrawal-details div { margin: 4px 0; }
+        .no-data { text-align: center; padding: 40px 20px; color: #6b7280; }
+        .no-data i { font-size: 48px; margin-bottom: 15px; opacity: 0.5; display: block; }
+        .back-btn { display: block; text-align: center; color: #6b7280; text-decoration: none; padding: 12px; margin-top: 20px; transition: color 0.3s; }
+        .back-btn:hover { color: #22c55e; }
+        .success-message, .error-message { padding: 16px; border-radius: 12px; margin-bottom: 20px; display: none; }
+        .success-message { background: rgba(34,197,94,0.2);  border: 1px solid rgba(34,197,94,0.4);  color: #22c55e; }
+        .error-message   { background: rgba(239,68,68,0.2);  border: 1px solid rgba(239,68,68,0.4);  color: #fca5a5; }
+        @media (max-width: 480px) { .balance-amount { font-size: 36px; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-wallet"></i> Withdrawal</h1>
+            <p>Request to withdraw your earnings</p>
+        </div>
+
+        <div class="balance-card">
+            <div class="balance-label">Available Balance</div>
+            <div class="balance-amount">Rs <span id="availableBalance">0</span></div>
+        </div>
+
+        <div id="successMessage" class="success-message"></div>
+        <div id="errorMessage"   class="error-message"></div>
+
+        <div class="withdrawal-form">
+            <div class="form-title">Request Withdrawal</div>
+
+            <div class="min-withdrawal">
+                <i class="fas fa-info-circle"></i> Minimum withdrawal amount: Rs 500
+            </div>
+
+            <form id="withdrawalForm">
+                <div class="form-group">
+                    <label>Withdrawal Amount (Rs) <span style="color:#ef4444;">*</span></label>
+                    <input type="number" id="withdrawAmount" placeholder="Enter amount" min="500" required>
+                </div>
+
+                <div class="form-group">
+                    <label>JazzCash Account Number <span style="color:#ef4444;">*</span></label>
+                    <input type="tel" id="jazzCashAccount" placeholder="03XXXXXXXXX" pattern="[0-9]{11}" required>
+                </div>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-clock"></i> Processing Time</h4>
+                    <ul>
+                        <li>Your withdrawal will be processed within 24 hours</li>
+                        <li>You will receive a notification once approved</li>
+                        <li>Money will be sent to your JazzCash account</li>
+                        <li>Your balance is deducted immediately on request</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Request Withdrawal
+                </button>
+            </form>
+        </div>
+
+        <div class="pending-withdrawals">
+            <div class="pending-title">Your Withdrawal History</div>
+            <div id="withdrawalsList">
+                <div class="no-data">
+                    <i class="fas fa-inbox"></i>
+                    <p>No withdrawal requests yet</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="dashboard.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import {
+            getFirestore, doc, getDoc, updateDoc,
+            collection, addDoc, query, where, getDocs, orderBy, onSnapshot
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+
+        const app  = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db   = getFirestore(app);
+
+        let currentUser = null;
+        let userBalance = 0;
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) { window.location.href = "login.html"; return; }
+            currentUser = user;
+            await loadUserBalance();
+            loadWithdrawalsRealtime();
+        });
+
+        async function loadUserBalance() {
+            try {
+                const snap = await getDoc(doc(db, "users", currentUser.uid));
+                if (snap.exists()) {
+                    userBalance = snap.data().balance || 0;
+                    document.getElementById("availableBalance").textContent = formatNumber(userBalance);
+                }
+            } catch (err) { console.error("Balance load error:", err); }
+        }
+
+        function loadWithdrawalsRealtime() {
+            const q = query(
+                collection(db, "withdrawals"),
+                where("userId", "==", currentUser.uid)
+            );
+            onSnapshot(q, (snapshot) => {
+                displayWithdrawals(snapshot);
+                // Reload balance in case admin approved/rejected (balance changed server-side)
+                loadUserBalance();
+            });
+        }
+
+        function displayWithdrawals(snapshot) {
+            const container = document.getElementById("withdrawalsList");
+            if (snapshot.empty) {
+                container.innerHTML = `<div class="no-data"><i class="fas fa-inbox"></i><p>No withdrawal requests yet</p></div>`;
+                return;
+            }
+            // Sort newest first
+            const docs = [];
+            snapshot.forEach(d => docs.push({ id: d.id, ...d.data() }));
+            docs.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+
+            let html = "";
+            docs.forEach(w => {
+                const date        = w.date ? new Date(w.date).toLocaleString() : "N/A";
+                const statusClass = `status-${w.status}`;
+                html += `
+                    <div class="withdrawal-item">
+                        <div class="withdrawal-item-header">
+                            <div class="withdrawal-amount">Rs ${formatNumber(w.amount)}</div>
+                            <span class="status-badge ${statusClass}">${w.status}</span>
+                        </div>
+                        <div class="withdrawal-details">
+                            <div><i class="fas fa-mobile-alt"></i> ${w.account || "N/A"}</div>
+                            <div><i class="fas fa-calendar"></i> ${date}</div>
+                            ${w.transactionId ? `<div><i class="fas fa-check-circle" style="color:#22c55e;"></i> Tx: ${w.transactionId}</div>` : ''}
+                            ${w.rejectionReason ? `<div style="color:#ef4444;"><i class="fas fa-exclamation-circle"></i> ${w.rejectionReason}</div>` : ''}
+                        </div>
+                    </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        document.getElementById("withdrawalForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const amount  = parseFloat(document.getElementById("withdrawAmount").value);
+            const account = document.getElementById("jazzCashAccount").value.trim();
+            const submitBtn = document.getElementById("submitBtn");
+
+            // Validations
+            if (!amount || amount < 500) { showError("Minimum withdrawal amount is Rs 500."); return; }
+            if (amount > userBalance)    { showError(`Insufficient balance. Available: Rs ${formatNumber(userBalance)}`); return; }
+            if (!/^03[0-9]{9}$/.test(account)) { showError("Enter a valid 11-digit JazzCash number starting with 03."); return; }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+            try {
+                // ✅ FIX: Deduct balance immediately on request submission.
+                // Admin restores it on rejection. This prevents double-spending.
+                const userRef  = doc(db, "users", currentUser.uid);
+                const userSnap = await getDoc(userRef);
+                if (!userSnap.exists()) { showError("User not found. Please refresh."); return; }
+
+                const currentBalance = userSnap.data().balance || 0;
+                if (amount > currentBalance) {
+                    showError(`Insufficient balance. Available: Rs ${formatNumber(currentBalance)}`);
+                    return;
+                }
+
+                // Create withdrawal doc
+                await addDoc(collection(db, "withdrawals"), {
+                    userId:  currentUser.uid,
+                    email:   currentUser.email,
+                    amount:  amount,
+                    account: account,
+                    status:  "pending",
+                    date:    new Date().toISOString()
+                });
+
+                // ✅ Deduct from user balance
+                await updateDoc(userRef, {
+                    balance: currentBalance - amount
+                });
+
+                // Update local balance display
+                userBalance = currentBalance - amount;
+                document.getElementById("availableBalance").textContent = formatNumber(userBalance);
+
+                showSuccess(`✅ Withdrawal request of Rs ${formatNumber(amount)} submitted! Your balance has been updated. Processing within 24 hours.`);
+                document.getElementById("withdrawalForm").reset();
+
+            } catch (err) {
+                console.error("Withdrawal error:", err);
+                showError("Failed to submit withdrawal. Please try again.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Request Withdrawal';
+            }
+        });
+
+        function showSuccess(msg) {
+            const el = document.getElementById("successMessage");
+            el.textContent = msg; el.style.display = "block";
+            document.getElementById("errorMessage").style.display = "none";
+            window.scrollTo(0, 0);
+            setTimeout(() => el.style.display = "none", 10000);
+        }
+
+        function showError(msg) {
+            const el = document.getElementById("errorMessage");
+            el.textContent = msg; el.style.display = "block";
+            document.getElementById("successMessage").style.display = "none";
+            window.scrollTo(0, 0);
+            setTimeout(() => el.style.display = "none", 5000);
+        }
+
+        function formatNumber(num) { return Math.floor(num || 0).toLocaleString(); }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rizq Digital - Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: linear-gradient(135deg, #0a0e27, #1a1f3a);
+      padding: 30px 20px;
+    }
+
+    .glow-bg {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      background: #22c55e;
+      filter: blur(160px);
+      opacity: 0.15;
+      animation: float 6s infinite alternate;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    @keyframes float {
+      from { transform: translateX(-50%) translateY(-30px); }
+      to   { transform: translateX(-50%) translateY(30px); }
+    }
+
+    .register-box {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 480px;
+      padding: 40px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      box-shadow: 0 0 45px rgba(34, 197, 94, 0.15);
+      color: #e5e7eb;
+    }
+
+    .brand-icon {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    h2 {
+      margin-bottom: 6px;
+      font-size: 26px;
+      background: linear-gradient(135deg, #22c55e, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    /* Alert messages */
+    .error-message, .success-message {
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .error-message {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .success-message {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #86efac;
+    }
+
+    .error-message.show, .success-message.show { display: flex; }
+
+    /* Info box */
+    .info-box {
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+    }
+
+    .info-box h4 {
+      color: #22c55e;
+      font-size: 13px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .info-box ul { list-style: none; padding: 0; }
+
+    .info-box li {
+      color: #94a3b8;
+      font-size: 12px;
+      margin-bottom: 4px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .info-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #22c55e;
+      font-weight: 700;
+    }
+
+    /* Form inputs */
+    .input-group {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .input-group > i {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      transform: translateY(-50%);
+      color: #22c55e;
+      font-size: 14px;
+      z-index: 1;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 13px 14px 13px 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      background: rgba(0, 0, 0, 0.35);
+      color: #e5e7eb;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .input-group input::placeholder { color: #475569; }
+
+    .input-group input:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      color: #475569;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 14px;
+      padding: 0;
+    }
+
+    .toggle-password:hover { color: #22c55e; }
+
+    /* Referral section */
+    .referral-section {
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+
+    .referral-section p {
+      color: #86efac;
+      font-size: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .referral-section .input-group { margin-bottom: 0; }
+
+    /* Referral auto-detected badge */
+    .ref-badge {
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #86efac;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      margin-top: 8px;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ref-badge.show { display: flex; }
+
+    /* ── Invite Banner ── */
+    .invite-banner {
+      display: none;
+      background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(6,182,212,0.10));
+      border: 1px solid rgba(34,197,94,0.4);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+      animation: bannerIn 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .invite-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 90% 50%, rgba(34,197,94,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .invite-banner.show { display: flex; align-items: center; gap: 14px; }
+
+    @keyframes bannerIn {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0);     }
+    }
+
+    .invite-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22c55e, #06b6d4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800; color: white;
+      flex-shrink: 0;
+      box-shadow: 0 6px 18px rgba(34,197,94,0.35);
+    }
+
+    .invite-body { flex: 1; min-width: 0; }
+
+    .invite-title {
+      font-size: 13px; font-weight: 700; color: #f1f5f9;
+      margin-bottom: 3px;
+    }
+
+    .invite-name {
+      font-size: 16px; font-weight: 800;
+      background: linear-gradient(135deg, #22c55e, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .invite-msg {
+      font-size: 11px; color: #86efac; line-height: 1.5;
+    }
+
+    .invite-badge {
+      background: rgba(34,197,94,0.2);
+      border: 1px solid rgba(34,197,94,0.4);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 10px; font-weight: 700; color: #86efac;
+      white-space: nowrap;
+    }
+
+    /* Submit button */
+    .register-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 8px;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .register-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
+    }
+
+    .register-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .footer-text {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    .footer-text a {
+      color: #22c55e;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-text a:hover { text-decoration: underline; }
+
+    @media (max-width: 500px) {
+      .register-box { padding: 28px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-bg"></div>
+
+  <div class="register-box">
+    <div class="brand-icon"><i class="fas fa-gem"></i></div>
+    <h2>Create Account</h2>
+    <p class="subtitle">Start your investment journey with Rizq Digital</p>
+
+    <div id="errorMessage" class="error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="errorText"></span>
+    </div>
+    <div id="successMessage" class="success-message">
+      <i class="fas fa-check-circle"></i>
+      <span id="successText"></span>
+    </div>
+
+    <!-- Getting Started info -->
+    <div class="info-box">
+      <h4><i class="fas fa-info-circle"></i> Getting Started</h4>
+      <ul>
+        <li>All new users must start with Daily Starter Package (Rs 500)</li>
+        <li>After completing starter, unlock higher packages</li>
+        <li>Referral code is optional but gives your referrer a 2% bonus</li>
+        <li>Verify your phone number for withdrawals</li>
+      </ul>
+    </div>
+
+    <form id="registerForm">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="username" placeholder="Full Name" required minlength="3">
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="email" placeholder="Email Address" required autocomplete="email">
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-phone"></i>
+        <input type="tel" id="phone" placeholder="Phone Number (03XXXXXXXXX)" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-id-card"></i>
+        <input type="text" id="cnic" placeholder="CNIC (Optional - for KYC)">
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" placeholder="Password (min 6 characters)" required minlength="6">
+        <button type="button" class="toggle-password" onclick="togglePass('password','eyeIcon1')">
+          <i class="fas fa-eye" id="eyeIcon1"></i>
+        </button>
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required minlength="6">
+        <button type="button" class="toggle-password" onclick="togglePass('confirmPassword','eyeIcon2')">
+          <i class="fas fa-eye" id="eyeIcon2"></i>
+        </button>
+      </div>
+
+      <!-- Invite Banner — shown when arriving from a referral link -->
+      <div id="inviteBanner" class="invite-banner" style="display:none;">
+        <div class="invite-avatar" id="inviteAvatar">?</div>
+        <div class="invite-body">
+          <div class="invite-title">🎉 You were invited by</div>
+          <div class="invite-name" id="inviteName">—</div>
+          <div class="invite-msg">Ref code: <strong id="inviterCode"></strong> · Your referrer earns 2% when you invest!</div>
+        </div>
+        <div class="invite-badge">Invite ✅</div>
+      </div>
+
+      <!-- Referral Code -->
+      <div class="referral-section">
+        <p><i class="fas fa-gift"></i> Have a referral code? (Optional)</p>
+        <div class="input-group">
+          <i class="fas fa-ticket-alt"></i>
+          <input type="text" id="referralCode" placeholder="Enter Referral Code" style="text-transform:uppercase;" autocomplete="off">
+        </div>
+        <!-- Auto-detected badge shows when ?ref= is in URL -->
+        <div id="refBadge" class="ref-badge">
+          <i class="fas fa-check-circle"></i>
+          Referral code auto-detected from invite link
+        </div>
+      </div>
+
+      <button type="submit" class="register-btn" id="registerBtn">
+        <i class="fas fa-user-plus"></i> Create Account
+      </button>
+    </form>
+
+    <div class="footer-text">
+      Already have an account? <a href="login.html">Login Here</a>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, serverTimestamp, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+
+    const app   = initializeApp(firebaseConfig);
+    const auth  = getAuth(app);
+    const db    = getFirestore(app);
+
+    const errorDiv    = document.getElementById("errorMessage");
+    const errorText   = document.getElementById("errorText");
+    const successDiv  = document.getElementById("successMessage");
+    const successText = document.getElementById("successText");
+    const registerBtn = document.getElementById("registerBtn");
+
+    // Auto-fill referral code and show invite banner with referrer name
+    const urlParams = new URLSearchParams(window.location.search);
+    const refParam  = urlParams.get('ref');
+
+    async function lookupAndShowInviteBanner(code) {
+      try {
+        // Try exact match first
+        let snap = await getDocs(query(collection(db, "users"), where("referralCode", "==", code)));
+
+        // Also try lowercase (email-based codes are lowercase)
+        if (snap.empty) {
+          snap = await getDocs(query(collection(db, "users"), where("referralCode", "==", code.toLowerCase())));
+        }
+
+        if (!snap.empty) {
+          const referrer = snap.docs[0].data();
+          const name     = referrer.username || referrer.email?.split('@')[0] || "A Rizq Digital member";
+          const initial  = name.charAt(0).toUpperCase();
+
+          document.getElementById("inviteAvatar").textContent = initial;
+          document.getElementById("inviteName").textContent   = name;
+          document.getElementById("inviterCode").textContent  = code;
+          document.getElementById("inviteBanner").style.display = "flex";
+        }
+      } catch (err) {
+        console.warn("Referrer lookup:", err.message);
+      }
+    }
+
+    if (refParam) {
+      document.getElementById('referralCode').value = refParam;
+      document.getElementById('refBadge').classList.add('show');
+      lookupAndShowInviteBanner(refParam);
+    }
+
+    // Toggle password visibility
+    window.togglePass = function(fieldId, iconId) {
+      const field = document.getElementById(fieldId);
+      const icon  = document.getElementById(iconId);
+      if (field.type === "password") {
+        field.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+      } else {
+        field.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+      }
+    };
+
+    function showError(msg) {
+      errorText.textContent = msg;
+      errorDiv.classList.add("show");
+      successDiv.classList.remove("show");
+      setTimeout(() => errorDiv.classList.remove("show"), 6000);
+    }
+
+    function showSuccess(msg) {
+      successText.textContent = msg;
+      successDiv.classList.add("show");
+      errorDiv.classList.remove("show");
+    }
+
+    // Referral code = first 12 alphanumeric chars of email local part (before @)
+    // Static & predictable: johnabram208@gmail.com → johnabram208
+    function generateReferralCode(email) {
+      return email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '').substring(0, 12);
+    }
+
+    async function getIPAddress() {
+      try {
+        const r = await fetch('https://api.ipify.org?format=json');
+        const d = await r.json();
+        return d.ip;
+      } catch { return "unknown"; }
+    }
+
+    function getDeviceId() {
+      let id = localStorage.getItem('deviceId');
+      if (!id) {
+        id = 'device_' + Math.random().toString(36).substring(2, 15);
+        localStorage.setItem('deviceId', id);
+      }
+      return id;
+    }
+
+    // ✅ FIX: Validate referral code against Firestore referralCode field
+    async function validateReferralCode(code) {
+      if (!code || code.trim() === "") return null;
+      const q = query(collection(db, "users"), where("referralCode", "==", code.toUpperCase()));
+      const snap = await getDocs(q);
+      if (snap.empty) throw new Error("Invalid referral code. Please check and try again.");
+      return snap.docs[0].id;
+    }
+
+    document.getElementById("registerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const username        = document.getElementById("username").value.trim();
+      const email           = document.getElementById("email").value.trim();
+      const phone           = document.getElementById("phone").value.trim();
+      const cnic            = document.getElementById("cnic").value.trim();
+      const password        = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const referralCode    = document.getElementById("referralCode").value.trim();
+
+      // Validations
+      if (password !== confirmPassword) { showError("Passwords do not match!"); return; }
+      if (password.length < 6)          { showError("Password must be at least 6 characters!"); return; }
+      if (!/^03[0-9]{9}$/.test(phone))  { showError("Invalid phone number! Use format: 03XXXXXXXXX"); return; }
+      if (username.length < 3)           { showError("Name must be at least 3 characters!"); return; }
+
+      registerBtn.disabled = true;
+      registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+
+      try {
+        const ipAddress = await getIPAddress();
+        const deviceId  = getDeviceId();
+
+        // Validate referral code if provided
+        let referredBy = null;
+        if (referralCode) {
+          try {
+            referredBy = await validateReferralCode(referralCode);
+          } catch (err) {
+            showError(err.message);
+            registerBtn.disabled = false;
+            registerBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+            return;
+          }
+        }
+
+        // Create Firebase Auth user
+        const userCred = await createUserWithEmailAndPassword(auth, email, password);
+        const user     = userCred.user;
+        const newReferralCode = generateReferralCode(email);
+
+        // ✅ FIX: referredBy stored as UID (not empty string, use null)
+        await setDoc(doc(db, "users", user.uid), {
+          uid:             user.uid,
+          username:        username,
+          email:           email,
+          phone:           phone,
+          cnic:            cnic || "",
+
+          // Financial
+          balance:         0,
+          totalInvested:   0,
+          totalEarned:     0,
+          totalWithdrawn:  0,
+          dailyProfit:     0,
+
+          // Package Info
+          currentPackage:  "none",
+          packageLevel:    0,
+          packageHistory:  [],
+
+          // Referral
+          referralCode:    newReferralCode,
+          referredBy:      referredBy || null,
+          totalTeam:       0,
+          activeTeam:      0,
+          directReferrals: [],
+          teamBonus:       0,
+
+          // Security / Meta
+          ipAddress:       ipAddress,
+          deviceId:        deviceId,
+          lastLogin:       serverTimestamp(),
+          accountStatus:   "active",
+          kycStatus:       cnic ? "pending" : "not_submitted",
+          createdAt:       serverTimestamp(),
+          updatedAt:       serverTimestamp()
+        });
+
+        // Track IP
+        const ipDocRef = doc(db, "ipTracking", ipAddress);
+        const ipDoc    = await getDoc(ipDocRef);
+        if (ipDoc.exists()) {
+          const cur = ipDoc.data();
+          await setDoc(ipDocRef, {
+            userIds:   [...(cur.userIds || []), user.uid],
+            deviceIds: [...(cur.deviceIds || []), deviceId],
+            flagged:   (cur.userIds || []).length >= 1,
+            lastSeen:  serverTimestamp()
+          });
+        } else {
+          await setDoc(ipDocRef, {
+            userIds: [user.uid], deviceIds: [deviceId], flagged: false, lastSeen: serverTimestamp()
+          });
+        }
+
+        // Update referrer's team if referred
+        if (referredBy) {
+          const referrerRef  = doc(db, "users", referredBy);
+          const referrerSnap = await getDoc(referrerRef);
+          if (referrerSnap.exists()) {
+            const rd = referrerSnap.data();
+            await setDoc(referrerRef, {
+              ...rd,
+              directReferrals: [...(rd.directReferrals || []), user.uid],
+              totalTeam:       (rd.totalTeam || 0) + 1,
+              updatedAt:       serverTimestamp()
+            });
+            // Create referral record
+            await setDoc(doc(collection(db, "referrals")), {
+              referrerId:       referredBy,
+              referredUserId:   user.uid,
+              referredEmail:    email,
+              commission:       0,
+              commissionPaid:   false,
+              createdAt:        serverTimestamp()
+            });
+          }
+        }
+
+        showSuccess("✅ Account created! Redirecting to dashboard...");
+
+        // ✅ FIX: Redirect to dashboard (user is already authenticated), not login
+        setTimeout(() => { window.location.href = "dashboard.html"; }, 1800);
+
+      } catch (err) {
+        let msg = "Registration failed. Please try again.";
+        if (err.code === "auth/email-already-in-use") msg = "This email is already registered. Please login.";
+        else if (err.code === "auth/weak-password")   msg = "Password is too weak. Use at least 6 characters.";
+        else if (err.code === "auth/invalid-email")   msg = "Invalid email address.";
+        else if (err.message)                         msg = err.message;
+        showError(msg);
+        registerBtn.disabled = false;
+        registerBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+      }
+    });
+  </script>
+
+</body>
+</html>

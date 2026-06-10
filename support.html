@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <title>Support - Rizq Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{--bg-primary:#0a0e27;--bg-secondary:#141a3a;--accent-green:#22c55e;--accent-cyan:#06b6d4;--accent-purple:#8b5cf6;--text-primary:#f1f5f9;--text-muted:#94a3b8;--glass-bg:rgba(255,255,255,0.05);--glass-border:rgba(255,255,255,0.1);}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:linear-gradient(135deg,#0a0e27 0%,#1a1f3a 50%,#0f1729 100%);color:var(--text-primary);min-height:100vh;overflow-x:hidden;padding-bottom:100px;}
+    body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%,rgba(34,197,94,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(6,182,212,0.08) 0%,transparent 50%);z-index:-1;}
+    .container{max-width:430px;margin:0 auto;}
+    .header{background:rgba(10,14,39,0.8);backdrop-filter:blur(20px);padding:16px 20px;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--glass-border);}
+    .header-top{display:flex;justify-content:space-between;align-items:center;}
+    .logo-section{display:flex;align-items:center;gap:12px;}
+    .logo{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:white;}
+    .brand-name{font-size:18px;font-weight:700;background:linear-gradient(135deg,#22c55e,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .page-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;}
+    .icon-btn{width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:var(--text-primary);cursor:pointer;transition:all 0.3s;text-decoration:none;}
+    .main-content{padding:20px;}
+
+    /* Quick contact */
+    .quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;}
+    .quick-btn{background:var(--glass-bg);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:16px;padding:18px 12px;text-align:center;text-decoration:none;color:var(--text-primary);transition:all 0.3s;display:block;}
+    .quick-btn:hover{transform:translateY(-3px);}
+    .qb-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 10px;}
+    .qb-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);}
+    .qb-telegram{background:linear-gradient(135deg,#2aabee,#229ed9);}
+    .qb-youtube{background:linear-gradient(135deg,#ff0000,#cc0000);}
+    .qb-email{background:linear-gradient(135deg,var(--accent-purple),#7c3aed);}
+    .qb-label{font-size:13px;font-weight:700;margin-bottom:2px;}
+    .qb-sub{font-size:10px;color:var(--text-muted);}
+
+    .section{background:var(--glass-bg);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:18px;padding:20px;margin-bottom:16px;}
+    .section-title{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+    .title-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+
+    /* Form */
+    .form-group{margin-bottom:14px;}
+    .form-label{font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:6px;display:block;text-transform:uppercase;letter-spacing:0.4px;}
+    .form-input,.form-select,.form-textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);border-radius:12px;padding:13px 16px;color:var(--text-primary);font-size:14px;outline:none;transition:all 0.3s;font-family:'Poppins',sans-serif;}
+    .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent-green);background:rgba(34,197,94,0.05);}
+    .form-select option{background:#141a3a;color:var(--text-primary);}
+    .form-textarea{resize:vertical;min-height:110px;}
+    .submit-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan));border:none;border-radius:14px;color:white;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.3s;box-shadow:0 8px 20px rgba(34,197,94,0.3);font-family:'Poppins',sans-serif;}
+    .submit-btn:active{transform:scale(0.97);}
+    .submit-btn:disabled{opacity:0.6;cursor:not-allowed;}
+
+    .alert{padding:12px 16px;border-radius:12px;font-size:13px;font-weight:500;margin-bottom:12px;display:none;}
+    .alert-success{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:var(--accent-green);}
+    .alert-error{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;}
+
+    /* FAQ */
+    .faq-item{border-bottom:1px solid var(--glass-border);padding:14px 0;}
+    .faq-item:last-child{border-bottom:none;padding-bottom:0;}
+    .faq-item:first-child{padding-top:0;}
+    .faq-q{font-size:13px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+    .faq-q i{color:var(--accent-green);transition:transform 0.3s;flex-shrink:0;}
+    .faq-a{font-size:12px;color:var(--text-muted);line-height:1.6;margin-top:8px;display:none;}
+    .faq-item.open .faq-a{display:block;}
+    .faq-item.open .faq-q i{transform:rotate(180deg);}
+
+    /* Ticket history */
+    .ticket-item{background:rgba(255,255,255,0.03);border:1px solid var(--glass-border);border-radius:12px;padding:14px;margin-bottom:10px;}
+    .ticket-item:last-child{margin-bottom:0;}
+    .ticket-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+    .ticket-cat{font-size:11px;font-weight:700;background:rgba(34,197,94,0.15);color:var(--accent-green);padding:3px 8px;border-radius:8px;}
+    .ticket-date{font-size:10px;color:var(--text-muted);}
+    .ticket-msg{font-size:12px;color:var(--text-muted);}
+    .ticket-status{font-size:10px;font-weight:700;padding:4px 10px;border-radius:10px;display:inline-block;margin-top:6px;}
+    .ts-open{background:rgba(234,179,8,0.15);color:#eab308;}
+    .ts-resolved{background:rgba(34,197,94,0.15);color:var(--accent-green);}
+
+    .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(10,14,39,0.95);backdrop-filter:blur(20px);border-top:1px solid var(--glass-border);padding:12px 20px;display:flex;justify-content:space-around;z-index:100;border-radius:24px 24px 0 0;}
+    .nav-item{text-decoration:none;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:4px;transition:all 0.3s;padding:6px 12px;border-radius:12px;}
+    .nav-item.active{color:var(--accent-green);background:rgba(34,197,94,0.1);}
+    .nav-icon{font-size:20px;} .nav-label{font-size:10px;font-weight:600;}
+    .no-data{text-align:center;padding:20px;color:var(--text-muted);}
+    .no-data i{font-size:36px;opacity:0.3;display:block;margin-bottom:8px;}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div class="logo-section">
+        <div class="logo">R</div>
+        <div>
+          <div class="brand-name">Rizq Digital</div>
+          <div class="page-subtitle">Support Center</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <a href="dashboard.html" class="icon-btn"><i class="fas fa-arrow-left"></i></a>
+        <button class="icon-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-content">
+
+      <!-- Quick contact -->
+      <div class="quick-grid">
+        <a href="https://wa.me/923274971244?text=Hi%20Rizq%20Digital%20Support" target="_blank" class="quick-btn">
+          <div class="qb-icon qb-whatsapp"><i class="fab fa-whatsapp"></i></div>
+          <div class="qb-label">WhatsApp</div>
+          <div class="qb-sub">Fastest response</div>
+        </a>
+        <a href="https://t.me/rizqdigital" target="_blank" class="quick-btn">
+          <div class="qb-icon qb-telegram"><i class="fab fa-telegram"></i></div>
+          <div class="qb-label">Telegram</div>
+          <div class="qb-sub">@rizqdigital</div>
+        </a>
+        <a href="https://youtube.com/@rizqdigital" target="_blank" class="quick-btn">
+          <div class="qb-icon qb-youtube"><i class="fab fa-youtube"></i></div>
+          <div class="qb-label">YouTube</div>
+          <div class="qb-sub">Tutorials & guides</div>
+        </a>
+        <a href="https://whatsapp.com/channel/0029Vb7DhcI1iUxba0cn4A0S" target="_blank" class="quick-btn">
+          <div class="qb-icon qb-whatsapp"><i class="fas fa-bullhorn"></i></div>
+          <div class="qb-label">Updates</div>
+          <div class="qb-sub">Official channel</div>
+        </a>
+      </div>
+
+      <!-- Support ticket form -->
+      <div class="section">
+        <div class="section-title"><div class="title-icon">🎫</div>Submit a Support Ticket</div>
+        <div id="ticketAlert" class="alert"></div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select class="form-select" id="ticketCat">
+            <option value="">Select a category</option>
+            <option value="Deposit Issue">Deposit Issue</option>
+            <option value="Withdrawal Issue">Withdrawal Issue</option>
+            <option value="Plan Not Activated">Plan Not Activated</option>
+            <option value="Referral Commission Missing">Referral Commission Missing</option>
+            <option value="Account Access">Account Access</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Describe your issue</label>
+          <textarea class="form-textarea" id="ticketMsg" placeholder="Please describe your issue in detail. Include any transaction IDs if relevant..."></textarea>
+        </div>
+        <button class="submit-btn" id="submitTicketBtn" onclick="submitTicket()">
+          <i class="fas fa-paper-plane"></i> Submit Ticket
+        </button>
+      </div>
+
+      <!-- My tickets -->
+      <div class="section">
+        <div class="section-title"><div class="title-icon">📬</div>My Tickets</div>
+        <div id="ticketsContainer">
+          <div class="no-data"><i class="fas fa-inbox"></i><p>No tickets submitted yet.</p></div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="section">
+        <div class="section-title"><div class="title-icon">❓</div>Frequently Asked Questions</div>
+        <div id="faqContainer">
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">How long does deposit approval take? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a">Deposits are manually verified by our team within 2–24 hours. You will receive a notification once your plan is activated.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">When do I receive my daily profit? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a">Daily profits are automatically credited to your balance every time you open your dashboard. If you haven't logged in for a few days, all missed profits will be credited at once.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">How does the referral commission work? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a">You earn 2% of every deposit made by users who signed up with your referral code. The commission is credited automatically to your balance when the admin approves their payment.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Minimum and maximum withdrawal amounts? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a">Minimum withdrawal is Rs 500. There is no maximum limit. Withdrawals are processed within 2–24 hours via JazzCash.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">What if my withdrawal shows approved but I didn't receive money? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a">Check the Transaction ID shown in your withdrawal history. You can verify this ID directly in your JazzCash app. If the ID is valid but money hasn't arrived, contact support on WhatsApp immediately.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">How do I unlock higher investment packages? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a">You must first complete the Rs 500 Starter package. Once approved, all Field A, B, and C packages will be unlocked for you automatically.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item"><i class="nav-icon fas fa-home"></i><span class="nav-label">Dashboard</span></a>
+    <a href="plans.html" class="nav-item"><i class="nav-icon fas fa-layer-group"></i><span class="nav-label">Plans</span></a>
+    <a href="my-team.html" class="nav-item"><i class="nav-icon fas fa-users"></i><span class="nav-label">My Team</span></a>
+    <a href="withdraw.html" class="nav-item"><i class="nav-icon fas fa-wallet"></i><span class="nav-label">Withdraw</span></a>
+  </nav>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, query, where, getDocs, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+    const app=initializeApp(firebaseConfig); const auth=getAuth(app); const db=getFirestore(app);
+    let currentUser = null;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href="login.html"; return; }
+      currentUser = user;
+      await loadTickets();
+    });
+
+    window.submitTicket = async function() {
+      const cat = document.getElementById("ticketCat").value;
+      const msg = document.getElementById("ticketMsg").value.trim();
+      const btn = document.getElementById("submitTicketBtn");
+
+      if (!cat) { showAlert("error","Please select a category."); return; }
+      if (msg.length < 20) { showAlert("error","Please describe your issue in at least 20 characters."); return; }
+
+      btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+      try {
+        await addDoc(collection(db,"support_tickets"), {
+          userId:    currentUser.uid,
+          email:     currentUser.email,
+          category:  cat,
+          message:   msg,
+          status:    "open",
+          createdAt: serverTimestamp()
+        });
+        showAlert("success","✅ Ticket submitted! We'll respond within 24 hours. For urgent issues use WhatsApp.");
+        document.getElementById("ticketCat").value = "";
+        document.getElementById("ticketMsg").value = "";
+        await loadTickets();
+      } catch(err) {
+        showAlert("error","Error submitting ticket: " + err.message);
+      }
+      btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Ticket';
+    };
+
+    async function loadTickets() {
+      try {
+        const snap = await getDocs(query(collection(db,"support_tickets"), where("userId","==",currentUser.uid)));
+        if (snap.empty) return;
+        const tickets = [];
+        snap.forEach(d => tickets.push({id:d.id,...d.data()}));
+        tickets.sort((a,b) => toMs(b.createdAt) - toMs(a.createdAt));
+
+        const container = document.getElementById("ticketsContainer");
+        container.innerHTML = tickets.map(t => `
+          <div class="ticket-item">
+            <div class="ticket-header">
+              <span class="ticket-cat">${t.category}</span>
+              <span class="ticket-date">${formatDate(t.createdAt)}</span>
+            </div>
+            <div class="ticket-msg">${t.message.length > 100 ? t.message.slice(0,100)+'...' : t.message}</div>
+            <span class="ticket-status ts-${t.status}">${t.status === 'open' ? '⏳ Open' : '✅ Resolved'}</span>
+          </div>`).join('');
+      } catch(err) { console.error(err); }
+    }
+
+    window.toggleFaq = function(el) {
+      el.closest('.faq-item').classList.toggle('open');
+    };
+
+    function showAlert(type, msg) {
+      const el = document.getElementById("ticketAlert");
+      el.className = `alert alert-${type}`;
+      el.textContent = msg;
+      el.style.display = "block";
+      setTimeout(() => el.style.display = "none", 5000);
+    }
+
+    function toMs(v){if(!v)return 0;try{return v.toDate?v.toDate().getTime():new Date(v).getTime();}catch{return 0;}}
+    function formatDate(v){if(!v)return'N/A';try{const d=v.toDate?v.toDate():new Date(v);return d.toLocaleDateString('en-PK',{day:'numeric',month:'short'});}catch{return'N/A';}}
+    window.logout=()=>signOut(auth).then(()=>window.location.href="index.html");
+  </script>
+</body>
+</html>
