@@ -1,3 +1,16 @@
+<!-- LIVE PREVIEW — DG Technology -->
+<div align="center">
+
+[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-Open-06b6d4?style=for-the-badge&logo=vercel&logoColor=white)](https://referral-platform-demo.vercel.app/)
+
+<a href="https://referral-platform-demo.vercel.app/">
+  <img src="https://api.microlink.io/?url=https://referral-platform-demo.vercel.app/&screenshot=true&meta=false&embed=screenshot.url" alt="Live preview" width="100%" style="border-radius:10px" />
+</a>
+
+</div>
+
+---
+
 > ⚠️ **Educational / Proof of Concept** — This project is an open-source
 > portfolio demonstration. It is **not** for production or commercial use.
 > The author accepts **no liability** for any misuse. See [DISCLAIMER.md](DISCLAIMER.md).
