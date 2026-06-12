@@ -4,7 +4,7 @@
 
 <div align="center">
 
-# 💼 Rizq Digital — Investment & Referral Platform
+# 💼 ReferHub — Investment & Referral Platform
 
 **A complete fintech-style web platform with user wallets, tiered investment plans, a multi-level referral system, and a full admin control panel — powered by Firebase real-time data.**
 
@@ -21,7 +21,7 @@
 
 ## Overview
 
-**Rizq Digital** is a full-featured investment platform front-end with a complete user and admin ecosystem. Users register, fund a wallet, subscribe to investment plans, earn through a multi-level referral structure, and request withdrawals — while administrators manage users, payments, plans, and payouts from a dedicated control panel.
+**ReferHub** is a full-featured investment platform front-end with a complete user and admin ecosystem. Users register, fund a wallet, subscribe to investment plans, earn through a multi-level referral structure, and request withdrawals — while administrators manage users, payments, plans, and payouts from a dedicated control panel.
 
 The entire system is wired to **Firebase** (Auth + Firestore) for real-time balances, transactions, and team data, with live `onSnapshot` updates and batched writes for consistency.
 
@@ -74,7 +74,7 @@ The entire system is wired to **Firebase** (Auth + Firestore) for real-time bala
 ## Pages
 
 ```
-rizq-digital/
+ReferHub/
 ├── index.html              # Landing page
 ├── register / login        # Auth flows
 ├── dashboard.html          # User wallet & overview
