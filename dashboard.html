@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
-  <title>Dashboard - Rizq Digital</title>
+  <title>Dashboard - ReferHub</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -508,15 +508,15 @@
             <div class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
             <div class="social-info"><h4>Channel</h4><p>Join Updates</p></div>
           </a>
-          <a href="https://t.me/rizqdigital" target="_blank" class="social-btn">
+          <a href="https://t.me/referhub" target="_blank" class="social-btn">
             <div class="social-icon telegram"><i class="fab fa-telegram"></i></div>
-            <div class="social-info"><h4>Telegram</h4><p>@rizqdigital</p></div>
+            <div class="social-info"><h4>Telegram</h4><p>@referhub</p></div>
           </a>
-          <a href="https://youtube.com/@rizqdigital" target="_blank" class="social-btn">
+          <a href="https://youtube.com/@referhub" target="_blank" class="social-btn">
             <div class="social-icon youtube"><i class="fab fa-youtube"></i></div>
             <div class="social-info"><h4>YouTube</h4><p>Tutorials</p></div>
           </a>
-          <a href="https://linkedin.com/company/rizqdigital" target="_blank" class="social-btn">
+          <a href="https://linkedin.com/company/referhub" target="_blank" class="social-btn">
             <div class="social-icon linkedin"><i class="fab fa-linkedin"></i></div>
             <div class="social-info"><h4>LinkedIn</h4><p>Professional</p></div>
           </a>
@@ -686,7 +686,7 @@
               .catch(e => console.warn("Code migration:", e));
           }
 
-          const link = `https://rizqdigital.org/register.html?ref=${code}`;
+          const link = `https://referhub.org/register.html?ref=${code}`;
           document.getElementById("referralLink").value = link;
           document.getElementById("username").textContent = userData.username || currentUser.email.split('@')[0];
 
@@ -704,7 +704,7 @@
           });
           // ✅ BUG A FIX: set referral link immediately — onSnapshot/updateDashboard
           //               does NOT set it, so new users would see "Loading..." forever.
-          const link = `https://rizqdigital.org/register.html?ref=${emailCode}`;
+          const link = `https://referhub.org/register.html?ref=${emailCode}`;
           document.getElementById("referralLink").value = link;
           document.getElementById("username").textContent = currentUser.email.split('@')[0];
         }
