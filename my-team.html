@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
-  <title>My Team - Rizq Digital</title>
+  <title>My Team - ReferHub</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -352,7 +352,7 @@
       <div class="logo-section">
         <div class="logo">R</div>
         <div>
-          <div class="brand-name">Rizq Digital</div>
+          <div class="brand-name">ReferHub</div>
           <div class="page-subtitle">My Team</div>
         </div>
       </div>
@@ -491,11 +491,11 @@
         // Build referral link — use email-based code if stored, else derive from email
         const emailCode = currentUser.email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '').substring(0, 12);
         const refCode = userData.referralCode || emailCode;
-        const inviteLink = `https://rizqdigital.org/register.html?ref=${refCode}`;
+        const inviteLink = `https://referhub.org/register.html?ref=${refCode}`;
         window._myInviteLink = inviteLink;
 
         // Show in banner
-        document.getElementById("inviteLinkDisplay").textContent = `rizqdigital.org/register.html?ref=${refCode}`;
+        document.getElementById("inviteLinkDisplay").textContent = `referhub.org/register.html?ref=${refCode}`;
 
         // 2. Query all users who were referred by currentUser
         const membersQuery = query(
