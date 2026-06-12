@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Rizq Digital - Register</title>
+  <title>ReferHub - Register</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -353,7 +353,7 @@
   <div class="register-box">
     <div class="brand-icon"><i class="fas fa-gem"></i></div>
     <h2>Create Account</h2>
-    <p class="subtitle">Start your investment journey with Rizq Digital</p>
+    <p class="subtitle">Start your investment journey with ReferHub</p>
 
     <div id="errorMessage" class="error-message">
       <i class="fas fa-exclamation-circle"></i>
@@ -487,7 +487,7 @@
 
         if (!snap.empty) {
           const referrer = snap.docs[0].data();
-          const name     = referrer.username || referrer.email?.split('@')[0] || "A Rizq Digital member";
+          const name     = referrer.username || referrer.email?.split('@')[0] || "A ReferHub member";
           const initial  = name.charAt(0).toUpperCase();
 
           document.getElementById("inviteAvatar").textContent = initial;
